@@ -6,7 +6,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-class SleepTimer {
+public class SleepTimer {
 
 	public EntityPlayer	player;
 	public int			ticksRequired;
@@ -16,7 +16,7 @@ class SleepTimer {
 	public SleepTimer(int ticks, EntityPlayer target) {
 		this.player = target;
 		this.ticksRequired = ticks;
-		FMLCommonHandler.instance().bus().register(this);
+
 	}
 
 	public void enable() {
@@ -24,21 +24,18 @@ class SleepTimer {
 	}
 
 	@SubscribeEvent
-	public void timer(ServerTickEvent event) {
+	public void onServerTick(ServerTickEvent event) {
+		System.out.println("ticking");
 		if (enabled) {
 			this.ticked++;
 			if (this.ticked == this.ticksRequired) {
-				dream();
+
+				this.player.wakeUpPlayer(false, false, false);
+				Random rand = new Random(player.ticksExisted);
+				int dim = 36 + rand.nextInt(1);
+				player.travelToDimension(dim);
 				FMLCommonHandler.instance().bus().unregister(this);
 			}
 		}
 	}
-
-	public void dream() {
-		this.player.wakeUpPlayer(false, false, false);
-		Random rand = new Random(player.ticksExisted);
-		int dim = 36 + rand.nextInt(1);
-		player.travelToDimension(dim);
-	}
-
 }
