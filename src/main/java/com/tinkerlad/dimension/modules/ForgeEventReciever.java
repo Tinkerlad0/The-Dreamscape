@@ -10,7 +10,7 @@ public class ForgeEventReciever {
 		if (!event.isCanceled()) {
 			if (event.entityPlayer.worldObj.isRemote) {
 				System.out.println(event.entityPlayer.worldObj.isRemote);
-				SleepTimer timer = new SleepTimer(60, event.entityPlayer);
+				SleepTimer timer = new SleepTimer(60, event.entityPlayer, event);
 				FMLCommonHandler.instance().bus().register(timer);
 				timer.enable();
 

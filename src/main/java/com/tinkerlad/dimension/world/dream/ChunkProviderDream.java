@@ -155,7 +155,7 @@ public class ChunkProviderDream implements IChunkProvider {
 								} else if (k2 * 8 + l2 < b0) {
 									blocks[j3 += short1] = Blocks.hardened_clay;
 								} else {
-									blocks[j3 += short1] = Blocks.coal_ore;
+									blocks[j3 += short1] = Blocks.air;
 								}
 
 							}
