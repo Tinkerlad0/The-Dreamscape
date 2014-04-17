@@ -2,14 +2,12 @@ package com.tinkerlad.dimension.block;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.tinkerlad.dimension.block.particle.DimParticleSystem;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.tileEntities.TileBed;
 
@@ -59,17 +57,15 @@ public class BlockBed extends BlockGeneric {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		for (int i = 0; i < 50; i++) {
-			world.spawnParticle("fireworksSpark", x + 0.5D, y + 1.5D, z + 0.5D, 0, i * 0.1, 0);
-			mc = Minecraft.getMinecraft();
-			if (this.mc != null && this.mc.renderViewEntity != null && this.mc.effectRenderer != null) {
-				EntityFX entityfx = null;
-				entityfx = new DimParticleSystem(world, x, y, z, Material.water, drop);
-				if (entityfx != null) {
-					mc.effectRenderer.addEffect((EntityFX) entityfx);
-				}
-			}
-		}
+		// for (int i = 0; i < 50; i++) {
+		// world.spawnParticle("fireworksSpark", x + 0.5D, y + 1.5D, z + 0.5D,
+		// 0, i * 0.1, 0);
+		// Vector3 dest = new Vector3(x, y-3, z);
+		// ModParticles.ENERGY_TRAIL.constructParticle(world, x, y, z, dest);
+		// }
+
+		world.spawnParticle("fireworksSpark", x + 0.5D, y, z + 0.5D, 0, 0, 0);
+
 		return true;
 	}
 }

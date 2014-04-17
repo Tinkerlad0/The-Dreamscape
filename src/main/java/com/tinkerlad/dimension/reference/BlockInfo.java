@@ -18,13 +18,13 @@ public class BlockInfo {
 	 * Contains All Information About All DimBlocks
 	 */
 	// particles
-	public static final String	DIAMOND						= "/textures/particle/diamond.png";
+	public static final String	DIAMOND						= "textures/particle/diamond.png";
 
 	// BlockTimerTile
 	public static final String	TIMER_UNLOCALIZED_NAME		= "timerTile";
 	public static final String	TIMER_NAME					= "Timer Tile";
-	public static final String	TIMER_KEY						= "timerTile";
-	public static final String	TIMER_COMMENT					= "For Measuring Time Spent in Bed";
+	public static final String	TIMER_KEY					= "timerTile";
+	public static final String	TIMER_COMMENT				= "For Measuring Time Spent in Bed";
 
 	// BlockLightStone
 	public static final String	LIGHTSTONE_ULOCALIZED_NAME	= "lightStone";
