@@ -8,6 +8,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
+import com.tinkerlad.dimension.entity.nightmare.EntityExitGuard;
+
 public class BiomeGenNightmare extends BiomeGenBase {
 	public BiomeGenNightmare(int par1) {
 		super(par1);
@@ -15,30 +17,31 @@ public class BiomeGenNightmare extends BiomeGenBase {
 		this.topBlock = Blocks.sand;
 		this.fillerBlock = Blocks.sand;
 		this.spawnableCreatureList.clear();
-		// this.spawnableMonsterList.clear();
+		this.spawnableMonsterList.clear();
 		this.spawnableWaterCreatureList.clear();
 		this.setColor(0xFF00FF);
 		this.theBiomeDecorator.cactiPerChunk = 0;
 		this.theBiomeDecorator.deadBushPerChunk = 3;
+		this.spawnableMonsterList.add(new SpawnListEntry(EntityExitGuard.class, 10, 4, 4));
 	}
 
-	public void genTerrainBlocks(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_) {
+	public void genTerrainBlocks(World world, Random random, Block[] blockArray, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_) {
 		Block block = this.topBlock;
 		byte b0 = (byte) (this.field_150604_aj & 255);
 		Block block1 = this.fillerBlock;
 		int k = -1;
-		int l = (int) (p_150573_7_ / 3.0D + 3.0D + p_150573_2_.nextDouble() * 0.25D);
+		int l = (int) (p_150573_7_ / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		int i1 = p_150573_5_ & 15;
 		int j1 = p_150573_6_ & 15;
-		int k1 = p_150573_3_.length / 256;
+		int k1 = blockArray.length / 256;
 
 		for (int l1 = 255; l1 >= 0; --l1) {
 			int i2 = (j1 * 16 + i1) * k1 + l1;
 
-			if (l1 <= 0 + p_150573_2_.nextInt(5)) {
-				p_150573_3_[i2] = Blocks.bedrock;
+			if (l1 <= 0 + random.nextInt(5)) {
+				blockArray[i2] = Blocks.bedrock;
 			} else {
-				Block block2 = p_150573_3_[i2];
+				Block block2 = blockArray[i2];
 
 				if (block2 != null && block2.getMaterial() != Material.air) {
 					if (block2 == Blocks.sandstone) {
@@ -66,21 +69,21 @@ public class BiomeGenNightmare extends BiomeGenBase {
 							k = l;
 
 							if (l1 >= 62) {
-								p_150573_3_[i2] = block;
+								blockArray[i2] = block;
 								p_150573_4_[i2] = b0;
 							} else if (l1 < 56 - l) {
 								block = null;
 								block1 = Blocks.stone;
-								p_150573_3_[i2] = Blocks.gravel;
+								blockArray[i2] = Blocks.gravel;
 							} else {
-								p_150573_3_[i2] = block1;
+								blockArray[i2] = block1;
 							}
 						} else if (k > 0) {
 							--k;
-							p_150573_3_[i2] = block1;
+							blockArray[i2] = block1;
 
 							if (k == 0 && block1 == Blocks.sand) {
-								k = p_150573_2_.nextInt(4) + Math.max(0, l1 - 63);
+								k = random.nextInt(4) + Math.max(0, l1 - 63);
 								block1 = Blocks.sandstone;
 							}
 						}

@@ -9,7 +9,7 @@ import com.tinkerlad.dimension.world.Dimension;
 
 public class WorldProviderDream extends WorldProvider {
 	public void registerWorldChunkManager() {
-		this.worldChunkMgr = new WorldChunkManagerHell(Dimension.nightmare, 0.1F);
+		this.worldChunkMgr = new WorldChunkManagerHell(Dimension.dreamscape, 0.1F);
 		this.dimensionId = Dimension.dreamID;
 	}
 
@@ -46,7 +46,7 @@ public class WorldProviderDream extends WorldProvider {
 
 		portalLoc.posX = 0;
 		portalLoc.posZ = 0;
-		portalLoc.posY = worldObj.getHeightValue(0, 0) + 1;
+		portalLoc.posY = worldObj.getTopSolidOrLiquidBlock(0, 0);
 		return portalLoc;
 	}
 

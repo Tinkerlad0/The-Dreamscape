@@ -5,6 +5,8 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
+import com.tinkerlad.dimension.block.DimBlocks;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -153,7 +155,7 @@ public class ChunkProviderDream implements IChunkProvider {
 								if ((d15 += d16) > 0.0D) {
 									blocks[j3 += short1] = Blocks.hardened_clay;
 								} else if (k2 * 8 + l2 < b0) {
-									blocks[j3 += short1] = Blocks.hardened_clay;
+									blocks[j3 += short1] = DimBlocks.BlockLightStone;
 								} else {
 									blocks[j3 += short1] = Blocks.air;
 								}

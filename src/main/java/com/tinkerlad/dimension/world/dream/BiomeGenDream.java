@@ -47,7 +47,7 @@ public class BiomeGenDream extends BiomeGenBase {
 				Block block2 = p_150573_3_[i2];
 
 				if (block2 != null && block2.getMaterial() != Material.air) {
-					if (block2 == Blocks.sandstone) {
+					if (block2 == DimBlocks.BlockLightStone) {
 						if (k == -1) {
 							if (l <= 0) {
 								block = null;
@@ -87,7 +87,7 @@ public class BiomeGenDream extends BiomeGenBase {
 
 							if (k == 0 && block1 == Blocks.sand) {
 								k = p_150573_2_.nextInt(4) + Math.max(0, l1 - 63);
-								block1 = Blocks.sandstone;
+								block1 = DimBlocks.BlockLightStone;
 							}
 						}
 					}

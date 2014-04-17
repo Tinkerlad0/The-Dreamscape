@@ -17,6 +17,8 @@ public class BlockInfo {
 	/*
 	 * Contains All Information About All DimBlocks
 	 */
+	// particles
+	public static final String	DIAMOND						= "/textures/particle/diamond.png";
 
 	// BlockTimerTile
 	public static final String	TIMER_UNLOCALIZED_NAME		= "timerTile";

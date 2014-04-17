@@ -1,12 +1,15 @@
 package com.tinkerlad.dimension.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.tinkerlad.dimension.block.particle.DimParticleSystem;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.tileEntities.TileBed;
 
@@ -14,6 +17,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockBed extends BlockGeneric {
+
+	private Minecraft	mc;
 
 	public BlockBed() {
 		super(Material.cloth);
@@ -27,6 +32,8 @@ public class BlockBed extends BlockGeneric {
 	private IIcon	bottom;
 	@SideOnly(Side.CLIENT)
 	private IIcon	top;
+	@SideOnly(Side.CLIENT)
+	public IIcon	drop;
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
@@ -38,6 +45,7 @@ public class BlockBed extends BlockGeneric {
 		this.blockIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.BED_TEXTURE[2]);
 		this.top = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.BED_TEXTURE[1]);
 		this.bottom = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.BED_TEXTURE[0]);
+		this.drop = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.DIAMOND);
 	}
 
 	@Override
@@ -51,6 +59,17 @@ public class BlockBed extends BlockGeneric {
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
-		return false;
+		for (int i = 0; i < 50; i++) {
+			world.spawnParticle("fireworksSpark", x + 0.5D, y + 1.5D, z + 0.5D, 0, i * 0.1, 0);
+			mc = Minecraft.getMinecraft();
+			if (this.mc != null && this.mc.renderViewEntity != null && this.mc.effectRenderer != null) {
+				EntityFX entityfx = null;
+				entityfx = new DimParticleSystem(world, x, y, z, Material.water, drop);
+				if (entityfx != null) {
+					mc.effectRenderer.addEffect((EntityFX) entityfx);
+				}
+			}
+		}
+		return true;
 	}
 }

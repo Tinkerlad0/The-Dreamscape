@@ -55,6 +55,7 @@ public class Possession {
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		TabHandler.init();
 
+
 		DimBlocks.init();
 		DimItem.init();
 		Dimension.init();

@@ -10,14 +10,11 @@
  ******************************************************************************/
 package com.tinkerlad.dimension.block;
 
-
-
-
-
 import net.minecraft.block.Block;
 
 import org.apache.logging.log4j.Level;
 
+import com.tinkerlad.dimension.block.dream.BlockDiamondLeaves;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.BlockInfo;
 
@@ -27,10 +24,12 @@ public class DimBlocks {
 
 	public static Block BedTimer;
 	public static Block BlockLightStone;
-	public static Block BlockPlatinumOre;
 	public static Block	BlockBed;
 	public static Block	BlockDimBed;
 	
+	// DreamBlocks
+	public static Block	BlockDiamondLeaves;
+
 	public static Block	BlockDebug;
 
 	public static void init() {
@@ -40,8 +39,8 @@ public class DimBlocks {
 		BlockLightStone = new BlockLightStone();
 		GameRegistry.registerBlock(BlockLightStone, BlockInfo.LIGHTSTONE_ULOCALIZED_NAME);
 		
-		BlockPlatinumOre = new BlockPlatinumOre();
-		GameRegistry.registerBlock(BlockPlatinumOre, BlockInfo.PLATINUM_ULOCALIZED_NAME);
+		BlockDiamondLeaves = new BlockDiamondLeaves();
+		GameRegistry.registerBlock(BlockDiamondLeaves, "diamondLeaves");
 		
 		BlockDebug = new BlockDebug();
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
@@ -49,8 +48,6 @@ public class DimBlocks {
 		BlockBed = new BlockBed();
 		GameRegistry.registerBlock(BlockBed, BlockInfo.BED_ULOCALIZED_NAME);
 
-		BlockDimBed = new BlockDimBed();
-		GameRegistry.registerBlock(BlockDimBed, BlockInfo.BED_ULOCALIZED_NAME + "dim");
 		LogHelper.log(Level.INFO, "Loaded DimBlocks");
 	}
 

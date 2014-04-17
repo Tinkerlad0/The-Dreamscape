@@ -110,7 +110,7 @@ public class WorldGenLakesDream extends WorldGenerator {
 				}
 			}
 
-			if (block.getMaterial() == Material.lava) {
+			if (block.getMaterial() == Material.water) {
 				for (var8 = 0; var8 < 16; ++var8) {
 					for (var32 = 0; var32 < 16; ++var32) {
 						for (var10 = 0; var10 < 8; ++var10) {

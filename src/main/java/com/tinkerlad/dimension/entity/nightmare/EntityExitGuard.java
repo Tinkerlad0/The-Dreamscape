@@ -25,7 +25,7 @@ public class EntityExitGuard extends EntityMob {
 		ItemStack armour = new ItemStack(Items.leather_chestplate);
 		armour.addEnchantment(Enchantment.blastProtection, 50);
 
-		this.setCurrentItemOrArmor(2, armour);
+		// this.setCurrentItemOrArmor(2, armour);
 		this.getNavigator().setAvoidsWater(true);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false));
@@ -47,7 +47,7 @@ public class EntityExitGuard extends EntityMob {
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(0.5D);
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(64.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.knockbackResistance).setBaseValue(0.6D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
 
 	}
