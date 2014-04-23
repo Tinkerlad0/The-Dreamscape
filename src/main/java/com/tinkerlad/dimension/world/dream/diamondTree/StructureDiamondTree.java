@@ -10,16 +10,20 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import com.tinkerlad.dimension.block.DimBlocks;
 
 public class StructureDiamondTree extends WorldGenerator {
+
 	public StructureDiamondTree() {
+
 		super();
 	}
 
 	public StructureDiamondTree(boolean doNotify) {
+
 		super(doNotify);
 	}
 
 	@Override
 	public boolean generate(World world, Random rand, int x, int retries, int z) {
+
 		for (int c = 0; c < retries; c++) {
 			int y = world.getActualHeight() - 1;
 			while (world.isAirBlock(x, y, z) && y > 0) {
@@ -38,6 +42,7 @@ public class StructureDiamondTree extends WorldGenerator {
 	}
 
 	public boolean growTree(World world, Random rand, int x, int y, int z) {
+
 		int treeHeight = rand.nextInt(3) + 5, worldHeight = world.getHeight();
 		Block block;
 
@@ -66,8 +71,8 @@ public class StructureDiamondTree extends WorldGenerator {
 							for (zOffset = z - radius; zOffset <= z + radius; ++zOffset) {
 								block = world.getBlock(xOffset, yOffset, zOffset);
 								if (block != null
-										&& !(block.isLeaves(world, xOffset, yOffset, zOffset) || block.isAir(world, xOffset, yOffset, zOffset) || block.canBeReplacedByLeaves(world, xOffset,
-												yOffset, zOffset))) {
+										&& !(block.isLeaves(world, xOffset, yOffset, zOffset) || block.isAir(world, xOffset, yOffset, zOffset) || block
+												.canBeReplacedByLeaves(world, xOffset, yOffset, zOffset))) {
 									return false;
 								}
 							}
@@ -97,8 +102,8 @@ public class StructureDiamondTree extends WorldGenerator {
 							block = world.getBlock(xOffset, yOffset, zOffset);
 
 							if (((xPos != center | zPos != center) || rand.nextInt(2) != 0 && var12 != 0)
-									&& (block == null || block.isLeaves(world, xOffset, yOffset, zOffset) || block.isAir(world, xOffset, yOffset, zOffset) || block.canBeReplacedByLeaves(world,
-											xOffset, yOffset, zOffset))) {
+									&& (block == null || block.isLeaves(world, xOffset, yOffset, zOffset) || block.isAir(world, xOffset, yOffset, zOffset) || block
+											.canBeReplacedByLeaves(world, xOffset, yOffset, zOffset))) {
 								this.setBlockAndNotifyAdequately(world, xOffset, yOffset, zOffset, DimBlocks.BlockDiamondLeaves, 0);
 							}
 						}
@@ -108,10 +113,11 @@ public class StructureDiamondTree extends WorldGenerator {
 				for (yOffset = 0; yOffset < treeHeight; ++yOffset) {
 					block = world.getBlock(x, y + yOffset, z);
 
-					if (block == null || block.isAir(world, x, y + yOffset, z) || block.isLeaves(world, x, y + yOffset, z) || block.isReplaceable(world, x, y + yOffset, z)) // replace
-																																														// snow
+					if (block == null || block.isAir(world, x, y + yOffset, z) || block.isLeaves(world, x, y + yOffset, z)
+							|| block.isReplaceable(world, x, y + yOffset, z)) // replace
+																				// snow
 					{
-						this.setBlockAndNotifyAdequately(world, x, y + yOffset, z, Blocks.diamond_ore,1);
+						this.setBlockAndNotifyAdequately(world, x, y + yOffset, z, Blocks.diamond_ore, 1);
 					}
 				}
 
@@ -120,4 +126,5 @@ public class StructureDiamondTree extends WorldGenerator {
 		}
 		return false;
 	}
+
 }

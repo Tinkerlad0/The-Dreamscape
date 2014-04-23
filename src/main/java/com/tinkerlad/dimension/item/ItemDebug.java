@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import com.tinkerlad.dimension.reference.ItemInfo;
 import com.tinkerlad.dimension.world.Dimension;
+import com.tinkerlad.dimension.world.dream.diamondTree.DiamondTree;
 import com.tinkerlad.dimension.world.nightmare.TeleporterNightmare;
 
 import cpw.mods.fml.relauncher.Side;
@@ -42,13 +43,16 @@ public class ItemDebug extends ItemPossession {
 	public ItemStack onItemRightClick(ItemStack stack, World world,
  EntityPlayer par5Entity) {
 
-		if (par5Entity.isSneaking()) {
-			teleport(par5Entity, Dimension.nightmareID);
-		} else {
-			teleport(par5Entity, Dimension.dreamID);
-		}
+		DiamondTree.generate(world, world.rand, (int) par5Entity.posX, (int) par5Entity.posY, (int) par5Entity.posZ);
 
 		return stack;
+		// if (par5Entity.isSneaking()) {
+		// teleport(par5Entity, Dimension.nightmareID);
+		// } else {
+		// teleport(par5Entity, Dimension.dreamID);
+		// }
+		//
+		// return stack;
 	}
 
 

@@ -31,7 +31,7 @@ public class UtilsFX {
 	}
 
 	public static void bindTexture(String path) {
-		bindTexture(Resources.getCoreResource(path));
+		bindTexture(Resources.getResourceLocation(path));
 	}
 
 }

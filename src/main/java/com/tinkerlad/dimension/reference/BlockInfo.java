@@ -51,11 +51,14 @@ public class BlockInfo {
 	public static final String	DEBUG_NAME					= "Debug Block";
 	public static final String	DEBUG_TEXTURE				= "default";
 
-	// BlockBed
-	public static final String	BED_ULOCALIZED_NAME			= "dimBed";
-	public static final String	BED_NAME					= "Dimension Bed";
-	public static final String	BED_KEY						= "bed";
-	public static final String	BED_TEXTURE[]				= { "bed_bottom", "bed_top", "bed_side" };
-	public static final String	BED_DIM_TEXTURE				= TEXTURE_LOCATION + "bed/bed";
+	// BlockDiamondLeaves
+	public static final String	DIA_LEAVES_ULOCALIZED_NAME	= "leavesDiamond";
+	public static final String	DIA_LEAVES_KEY				= "leavesDiamond";
+	public static final String	DIA_LEAVES_TEXTURE[]		= { "leaves_diamond", "leaves_diamond_opaque" };
+
+	// BlockDiamondWood
+	public static final String	DIA_WOOD_ULOCALIZED_NAME	= "logDiamond";
+	public static final String	DIA_WOOD_KEY				= "logDiamond";
+	public static final String	DIA_WOOD_TEXTURE[]			= { "log_diamond", "log_diamond_top" };
 
 }

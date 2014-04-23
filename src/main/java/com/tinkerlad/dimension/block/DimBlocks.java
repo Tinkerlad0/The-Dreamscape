@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import org.apache.logging.log4j.Level;
 
 import com.tinkerlad.dimension.block.dream.BlockDiamondLeaves;
+import com.tinkerlad.dimension.block.dream.BlockDiamondWood;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.BlockInfo;
 
@@ -24,11 +25,11 @@ public class DimBlocks {
 
 	public static Block BedTimer;
 	public static Block BlockLightStone;
-	public static Block	BlockBed;
 	public static Block	BlockDimBed;
 	
 	// DreamBlocks
 	public static Block	BlockDiamondLeaves;
+	public static Block	BlockDiamondWood;
 
 	public static Block	BlockDebug;
 
@@ -42,11 +43,11 @@ public class DimBlocks {
 		BlockDiamondLeaves = new BlockDiamondLeaves();
 		GameRegistry.registerBlock(BlockDiamondLeaves, "diamondLeaves");
 		
+		BlockDiamondWood = new BlockDiamondWood();
+		GameRegistry.registerBlock(BlockDiamondWood, BlockInfo.DIA_WOOD_ULOCALIZED_NAME);
+		
 		BlockDebug = new BlockDebug();
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
-
-		BlockBed = new BlockBed();
-		GameRegistry.registerBlock(BlockBed, BlockInfo.BED_ULOCALIZED_NAME);
 
 		LogHelper.log(Level.INFO, "Loaded DimBlocks");
 	}

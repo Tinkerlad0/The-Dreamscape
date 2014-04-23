@@ -13,7 +13,7 @@ public class Resources {
 		return new ResourceLocation(modId, path);
 	}
 
-	public static ResourceLocation getCoreResource(String path) {
+	public static ResourceLocation getResourceLocation(String path) {
 		return getResourceLocation(ModInfo.ID, File.separator + path);
 	}
 
