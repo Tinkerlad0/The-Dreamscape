@@ -1,4 +1,4 @@
-package com.tinkerlad.dimension.modules;
+package com.tinkerlad.dimension.utils;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;

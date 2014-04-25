@@ -73,11 +73,6 @@ public class WorldProviderNightmare extends WorldProvider {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public boolean hasNoSky() {
-		return true;
-	}
-
 	public boolean doesXZShowFog(int par1, int par2) {
 		return true;
 	}
@@ -91,11 +86,24 @@ public class WorldProviderNightmare extends WorldProvider {
 	}
 
 	public float calculateCelestialAngle(long par1, float par3) {
-		return (float) ((3 * Math.PI) / 2);
+
+		return 0.5F;
 	}
 
 	@Override
 	public Vec3 getSkyColor(Entity cameraEntity, float partialTicks) {
 		return this.worldObj.getWorldVec3Pool().getVecFromPool(0, 0, 0.5);
 	}
+
+	@Override
+	protected void generateLightBrightnessTable() {
+
+		float f = 0.0F;
+
+		for (int i = 0; i <= 15; ++i) {
+			float f1 = 0.6F;
+			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
+		}
+	}
+
 }

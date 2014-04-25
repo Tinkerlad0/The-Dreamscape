@@ -8,17 +8,19 @@
  * Contributors:
  *     Tinkerlad - initial concept and implementation
  *****************************************************************************/
-package com.tinkerlad.dimension.modules;
+package com.tinkerlad.dimension.utils;
 
 import java.util.Iterator;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
@@ -28,8 +30,9 @@ import org.apache.logging.log4j.Level;
 import com.tinkerlad.dimension.config.GameControls;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.PossessionInfo;
+import com.tinkerlad.dimension.world.nightmare.TeleporterNightmare;
 
-public class PossessionModule {
+public class Utils {
 
 	@SuppressWarnings("rawtypes")
 	public static void getNearestValidEntity(World world, EntityPlayer player, int range) {
@@ -39,7 +42,8 @@ public class PossessionModule {
 			if (player.boundingBox != null) {
 				AxisAlignedBB bb = player.boundingBox.expand(range, 6, range);
 
-				if (world.findNearestEntityWithinAABB(Entity.class, bb, player) != null && world.findNearestEntityWithinAABB(Entity.class, bb, player) instanceof EntityMob) {
+				if (world.findNearestEntityWithinAABB(Entity.class, bb, player) != null
+						&& world.findNearestEntityWithinAABB(Entity.class, bb, player) instanceof EntityMob) {
 					EntityMob closest = (EntityMob) world.findNearestEntityWithinAABB(Entity.class, bb, player);
 					if (GameControls.DEBUG_MODE) {
 						player.addChatComponentMessage(new ChatComponentText("DimensionsEntity Class is " + closest.getClass()));
@@ -54,7 +58,8 @@ public class PossessionModule {
 							if (GameControls.DEBUG_MODE) {
 								;
 							}
-							player.addChatComponentMessage(new ChatComponentText(closest.posX + " " + closest.posY + " " + closest.posZ + " is " + closest.getClass()));
+							player.addChatComponentMessage(new ChatComponentText(closest.posX + " " + closest.posY + " " + closest.posZ + " is "
+									+ closest.getClass()));
 
 						}
 					}
@@ -72,12 +77,32 @@ public class PossessionModule {
 		while (iterator.hasNext()) {
 			ItemStack r = iterator.next().getRecipeOutput();
 			if (r != null && r.isItemEqual(new ItemStack(Items.bed, 1))) {
-			iterator.remove();
+				iterator.remove();
 				LogHelper.log(Level.INFO, "Vanilla Bed Recipe Removed");
 			}
 		}
 	}
 
+	public static void teleport(EntityPlayer par5Entity, int dimID) {
 
+		if ((par5Entity.ridingEntity == null) && (par5Entity.riddenByEntity == null) && ((par5Entity instanceof EntityPlayerMP))) {
+			EntityPlayerMP player = (EntityPlayerMP) par5Entity;
+
+			MinecraftServer mServer = MinecraftServer.getServer();
+
+			if (player.timeUntilPortal > 0) {
+				player.timeUntilPortal = 10;
+			} else if (player.dimension != dimID) {
+				player.timeUntilPortal = 10;
+
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimID,
+						new TeleporterNightmare(mServer.worldServerForDimension(dimID)));
+			} else {
+				player.timeUntilPortal = 10;
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0, new TeleporterNightmare(mServer.worldServerForDimension(0)));
+			}
+		}
+
+	}
 
 }

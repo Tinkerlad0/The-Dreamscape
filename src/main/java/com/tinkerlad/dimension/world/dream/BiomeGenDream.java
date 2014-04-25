@@ -24,7 +24,7 @@ public class BiomeGenDream extends BiomeGenBase {
 		this.theBiomeDecorator.deadBushPerChunk = 0;
 		this.theBiomeDecorator.clayPerChunk = 5;
 		this.theBiomeDecorator.treesPerChunk = 2;
-		this.setHeight(new BiomeGenBase.Height(1.6F, 2F));
+		this.setHeight(new BiomeGenBase.Height(-0.5F, 2F));
 
 
 	}

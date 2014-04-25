@@ -51,4 +51,9 @@ public class WorldProviderDream extends WorldProvider {
 		return portalLoc;
 	}
 
+	public float calculateCelestialAngle(long par1, float par3) {
+
+		return 0F;// (float) ((Math.PI) / 2);
+	}
+
 }

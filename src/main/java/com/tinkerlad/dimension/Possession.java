@@ -20,13 +20,14 @@ import com.tinkerlad.dimension.creativeTab.TabHandler;
 import com.tinkerlad.dimension.entity.DimensionsEntity;
 import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.logging.LogHelper;
-import com.tinkerlad.dimension.modules.FMLEventReciever;
-import com.tinkerlad.dimension.modules.ForgeEventReciever;
-import com.tinkerlad.dimension.modules.PossessionModule;
+import com.tinkerlad.dimension.packetHandling.PacketPipeline;
 import com.tinkerlad.dimension.proxies.ClientProxy;
 import com.tinkerlad.dimension.proxies.CommonProxy;
 import com.tinkerlad.dimension.reference.ModInfo;
 import com.tinkerlad.dimension.tileEntities.TileDimBed;
+import com.tinkerlad.dimension.utils.FMLEventReciever;
+import com.tinkerlad.dimension.utils.ForgeEventReciever;
+import com.tinkerlad.dimension.utils.Utils;
 import com.tinkerlad.dimension.world.Dimension;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -34,6 +35,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -46,6 +49,8 @@ public class Possession {
 
 	@SidedProxy(clientSide = "com.tinkerlad.dimension.proxies.ClientProxy", serverSide = "com.tinkerlad.dimension.proxies.CommonProxy")
 	public static CommonProxy	proxy;
+
+	public static final PacketPipeline	packetPipeline	= new PacketPipeline();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -62,7 +67,7 @@ public class Possession {
 		DimensionsEntity.init();
 
 		if (!GameControls.VANILLA_BED) {
-			PossessionModule.removeVanillaBed();
+			Utils.removeVanillaBed();
 		}
 
 		ClientProxy.registerRenderThings();
@@ -71,6 +76,18 @@ public class Possession {
 		DimItem.addRecipes();
 		MinecraftForge.EVENT_BUS.register(new ForgeEventReciever());
 		FMLCommonHandler.instance().bus().register(new FMLEventReciever());
+	}
+
+	@EventHandler
+	public void initialise(FMLInitializationEvent evt) {
+
+		packetPipeline.initialise();
+	}
+
+	@EventHandler
+	public void postInitialise(FMLPostInitializationEvent evt) {
+
+		packetPipeline.postInitialise();
 	}
 
 	@EventHandler

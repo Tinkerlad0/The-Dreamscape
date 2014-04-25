@@ -14,13 +14,11 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 
 import com.tinkerlad.dimension.reference.ModInfo;
+import com.tinkerlad.dimension.utils.Utils;
 import com.tinkerlad.dimension.world.Dimension;
-import com.tinkerlad.dimension.world.nightmare.TeleporterNightmare;
 
 public class PossessionCommand extends CommandBase {
 
@@ -50,16 +48,16 @@ public class PossessionCommand extends CommandBase {
 			sender.addChatMessage(new ChatComponentText("Available commands:"));
 			sender.addChatMessage(new ChatComponentText("- version : Version information."));
 			sender.addChatMessage(new ChatComponentText("- dream : travel to Dreamscape."));
-			sender.addChatMessage(new ChatComponentText("- version : Travel to Nightmare Realm."));
+			sender.addChatMessage(new ChatComponentText("- nightmare : Travel to Nightmare Realm."));
 			return;
 		} else if (arguments[0].matches("dream")) {
 			if (sender instanceof EntityPlayer) {
-			teleport((EntityPlayer) sender, Dimension.dreamID);
+				Utils.teleport((EntityPlayer) sender, Dimension.dreamID);
 			return;
 			}
 		} else if (arguments[0].matches("nightmare")) {
 			if (sender instanceof EntityPlayer) {
-				teleport((EntityPlayer) sender, Dimension.nightmareID);
+				Utils.teleport((EntityPlayer) sender, Dimension.nightmareID);
 				return;
 			}
 		}
@@ -73,27 +71,5 @@ public class PossessionCommand extends CommandBase {
 
 	}
 
-	private void teleport(EntityPlayer par5Entity, int dimID) {
-
-		if ((par5Entity.ridingEntity == null) && (par5Entity.riddenByEntity == null) && ((par5Entity instanceof EntityPlayerMP))) {
-			EntityPlayerMP player = (EntityPlayerMP) par5Entity;
-
-			MinecraftServer mServer = MinecraftServer.getServer();
-
-			if (player.timeUntilPortal > 0) {
-				player.timeUntilPortal = 10;
-			} else if (player.dimension != dimID) {
-				player.timeUntilPortal = 10;
-
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimID,
-						new TeleporterNightmare(mServer.worldServerForDimension(dimID)));
-			} else {
-				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0,
- new TeleporterNightmare(mServer.worldServerForDimension(0)));
-			}
-		}
-
-	}
 
 }

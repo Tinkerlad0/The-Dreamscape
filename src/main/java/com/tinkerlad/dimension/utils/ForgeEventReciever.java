@@ -1,4 +1,4 @@
-package com.tinkerlad.dimension.modules;
+package com.tinkerlad.dimension.utils;
 
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -14,10 +14,6 @@ public class ForgeEventReciever {
 				FMLCommonHandler.instance().bus().register(timer);
 				timer.enable();
 
-				// Timer timer = new Timer();
-				// teleportToDream dream = new teleportToDream();
-				// dream.player = event.entityPlayer;
-				// timer.schedule(dream, 3000);
 			}
 		}
 	}
