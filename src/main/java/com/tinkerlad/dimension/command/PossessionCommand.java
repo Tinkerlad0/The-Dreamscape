@@ -86,10 +86,11 @@ public class PossessionCommand extends CommandBase {
 				player.timeUntilPortal = 10;
 
 				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimID,
-						new TeleporterNightmare(mServer.worldServerForDimension(Dimension.nightmareID)));
+						new TeleporterNightmare(mServer.worldServerForDimension(dimID)));
 			} else {
 				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0);
+				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0,
+ new TeleporterNightmare(mServer.worldServerForDimension(0)));
 			}
 		}
 
