@@ -15,12 +15,11 @@ package com.tinkerlad.dimension.proxies;
 import org.apache.logging.log4j.Level;
 
 import com.tinkerlad.dimension.entity.nightmare.EntityExitGuard;
+import com.tinkerlad.dimension.entity.nightmare.EntityRidgebackSpider;
 import com.tinkerlad.dimension.entity.nightmare.RenderExitGuard;
+import com.tinkerlad.dimension.entity.nightmare.RenderRidgebackSpider;
 import com.tinkerlad.dimension.logging.LogHelper;
-import com.tinkerlad.dimension.tileEntities.TileDimBed;
-import com.tinkerlad.dimension.tileEntities.TESR.TileDimBedRenderer;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
@@ -38,8 +37,8 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	public static void registerRenderThings() {
-		ClientRegistry.bindTileEntitySpecialRenderer(TileDimBed.class, new TileDimBedRenderer());
 		RenderingRegistry.registerEntityRenderingHandler(EntityExitGuard.class, new RenderExitGuard());
+		RenderingRegistry.registerEntityRenderingHandler(EntityRidgebackSpider.class, new RenderRidgebackSpider());
 		LogHelper.log(Level.DEBUG, "RENDER INITIALISED");
 	}
 }

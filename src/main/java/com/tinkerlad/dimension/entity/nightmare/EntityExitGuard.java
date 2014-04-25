@@ -87,7 +87,7 @@ public class EntityExitGuard extends EntityMob {
 				this.worldObj.spawnParticle("explode", this.posX + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, this.posY
 						+ (double) (this.rand.nextFloat() * this.height), this.posZ + (double) (this.rand.nextFloat() * this.width * 2.0F) - (double) this.width, d0, d1, d2);
 			}
-			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 10F, false);
+			this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 4F, false);
 			this.setDead();
 		}
 	}

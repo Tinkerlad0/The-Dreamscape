@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
-import com.tinkerlad.dimension.entity.LabelRenderer;
 import com.tinkerlad.dimension.reference.BlockInfo;
 
 import cpw.mods.fml.relauncher.Side;
@@ -14,11 +13,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderExitGuard extends RenderBiped {
 	public ResourceLocation	func_110867_a	= new ResourceLocation(BlockInfo.TEXTURE_LOCATION + "textures/model/exitGuard.png");
-	private LabelRenderer	lr;
 
 	public RenderExitGuard() {
 		super(new ModelBiped(), 0.5F);
-		lr = new LabelRenderer();
+
 	}
 
 	protected ResourceLocation func_110870_a(EntityExitGuard par1) {

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Level;
 
 import com.tinkerlad.dimension.Possession;
 import com.tinkerlad.dimension.entity.nightmare.EntityExitGuard;
+import com.tinkerlad.dimension.entity.nightmare.EntityRidgebackSpider;
 import com.tinkerlad.dimension.logging.LogHelper;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -19,9 +20,11 @@ public class DimensionsEntity {
 	public static void init() {
 
 		registerEntity(EntityExitGuard.class, "entityExitGuard");
+		registerEntity(EntityRidgebackSpider.class, "entityRidgebackSpider");
 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void registerEntity(Class entityClass, String name) {
 		int entityID = EntityRegistry.findGlobalUniqueEntityId();
 		long seed = name.hashCode();
