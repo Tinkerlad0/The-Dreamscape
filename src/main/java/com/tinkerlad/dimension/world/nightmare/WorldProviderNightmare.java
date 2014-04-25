@@ -14,6 +14,11 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class WorldProviderNightmare extends WorldProvider {
+
+	public WorldProviderNightmare() {
+
+		this.hasNoSky = true;
+	}
 	public void registerWorldChunkManager() {
 		this.worldChunkMgr = new WorldChunkManagerHell(Dimension.nightmare, 0.1F);
 		this.dimensionId = Dimension.nightmareID;

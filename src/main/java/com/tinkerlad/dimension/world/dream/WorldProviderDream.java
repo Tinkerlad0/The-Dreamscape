@@ -34,7 +34,8 @@ public class WorldProviderDream extends WorldProvider {
 	}
 
 	public String getDimensionName() {
-		return "The Dreamscape";
+
+		return "The DreamScape";
 	}
 
 	/**
