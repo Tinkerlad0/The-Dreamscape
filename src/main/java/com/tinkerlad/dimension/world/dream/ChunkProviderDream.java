@@ -5,8 +5,6 @@ import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.Ev
 import java.util.List;
 import java.util.Random;
 
-import com.tinkerlad.dimension.block.DimBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -27,9 +25,14 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
+import com.tinkerlad.dimension.block.DimBlocks;
+import com.tinkerlad.dimension.world.WorldGenCustomMinable;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderDream implements IChunkProvider {
+
 	/**
 	 * RNG.
 	 */
@@ -58,7 +61,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	private WorldType				field_147435_p;
 	private final double[]			field_147434_q;
 	private final float[]			parabolicField;
-	private double[]				stoneNoise			= new double[256];
+	private double[]				stoneNoise		= new double[256];
 	/**
 	 * The biomes that are used to generate the chunk
 	 */
@@ -67,7 +70,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	double[]						field_147428_e;
 	double[]						field_147425_f;
 	double[]						field_147426_g;
-	int[][]							field_73219_j		= new int[32][32];
+	int[][]							field_73219_j	= new int[32][32];
 
 	{
 		// caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
@@ -78,6 +81,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	}
 
 	public ChunkProviderDream(World par1World, long par2, boolean par4) {
+
 		this.worldObj = par1World;
 		this.mapFeaturesEnabled = par4;
 		this.field_147435_p = par1World.getWorldInfo().getTerrainType();
@@ -111,6 +115,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	}
 
 	public void generateTerrain(int par1, int par2, Block[] blocks) {
+
 		byte b0 = 63;
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, par1 * 4 - 2, par2 * 4 - 2, 10, 10);
 		this.func_147423_a(par1 * 4, 0, par2 * 4);
@@ -177,18 +182,21 @@ public class ChunkProviderDream implements IChunkProvider {
 	}
 
 	public void replaceBlocksForBiome(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
+
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_5_);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == Result.DENY)
 			return;
 
 		double d0 = 0.03125D;
-		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (p_147422_1_ * 16), (double) (p_147422_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (p_147422_1_ * 16), (double) (p_147422_2_ * 16), 16, 16, d0 * 2.0D,
+				d0 * 2.0D, 1.0D);
 
 		for (int k = 0; k < 16; ++k) {
 			for (int l = 0; l < 16; ++l) {
 				BiomeGenBase biomegenbase = p_147422_5_[l + k * 16];
-				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, p_147422_1_ * 16 + k, p_147422_2_ * 16 + l, this.stoneNoise[l + k * 16]);
+				biomegenbase.genTerrainBlocks(this.worldObj, this.rand, p_147422_3_, p_147422_4_, p_147422_1_ * 16 + k, p_147422_2_ * 16 + l, this.stoneNoise[l
+						+ k * 16]);
 			}
 		}
 	}
@@ -197,6 +205,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * loads or generates the chunk at the chunk location specified
 	 */
 	public Chunk loadChunk(int par1, int par2) {
+
 		return this.provideChunk(par1, par2);
 	}
 
@@ -206,6 +215,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * and chunk seed
 	 */
 	public Chunk provideChunk(int par1, int par2) {
+
 		this.rand.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
 		Block[] ablock = new Block[65536];
 		byte[] abyte = new byte[65536];
@@ -234,11 +244,14 @@ public class ChunkProviderDream implements IChunkProvider {
 	}
 
 	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_) {
+
 		this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, 200.0D, 200.0D, 0.5D);
-		this.field_147427_d = this.field_147429_l
-				.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
-		this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
-		this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
+		this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5,
+				8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+		this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D,
+				684.412D, 684.412D);
+		this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D,
+				684.412D, 684.412D);
 		int l = 0;
 		int i1 = 0;
 
@@ -337,6 +350,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * Checks to see if a chunk exists at x, y
 	 */
 	public boolean chunkExists(int par1, int par2) {
+
 		return true;
 	}
 
@@ -344,6 +358,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * Populates chunk with ores etc etc
 	 */
 	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
+
 		BlockFalling.fallInstantly = false;
 		int var4 = par2 * 16;
 		int var5 = par3 * 16;
@@ -355,11 +370,6 @@ public class ChunkProviderDream implements IChunkProvider {
 		boolean var11 = false;
 
 		MinecraftForge.EVENT_BUS.post(new PopulateChunkEvent.Pre(par1IChunkProvider, worldObj, rand, par2, par3, var11));
-
-		if (this.mapFeaturesEnabled) {
-			// this.mineshaftGenerator.generateStructuresInChunk(this.worldObj,
-			// this.rand, par2, par3);
-		}
 
 		int var12;
 		int var13;
@@ -375,7 +385,25 @@ public class ChunkProviderDream implements IChunkProvider {
 			}
 		}
 
+		// BEGGINNING OF ORE SPAWNING
 
+		int i = par2 * 16;
+		int k = par3 * 16;
+
+		// Coal Block
+		generateDreamOre(Blocks.coal_block, worldObj, rand, i, k, 10, 25, 20, 190);
+		// Iron Block
+		generateDreamOre(Blocks.iron_block, worldObj, rand, i, k, 8, 25, 10, 170);
+		// Gold Block
+		generateDreamOre(Blocks.gold_block, worldObj, rand, i, k, 10, 15, 4, 80);
+		// Redstone Block
+		generateDreamOre(Blocks.redstone_block, worldObj, rand, i, k, 10, 25, 4, 80);
+		// Lapis Block
+		generateDreamOre(Blocks.lapis_block, worldObj, rand, i, k, 8, 25, 6, 60);
+		// Diamond Block
+		generateDreamOre(Blocks.diamond_block, worldObj, rand, i, k, 8, 10, 0, 50);
+
+		// End of Ore Spawning
 		biomegenbase.decorate(this.worldObj, this.rand, var4, var5);
 		SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, var4 + 8, var5 + 8, 16, 16, this.rand);
 		var4 += 8;
@@ -392,6 +420,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * saved.
 	 */
 	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
+
 		return true;
 	}
 
@@ -400,6 +429,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * only during world unload. Currently unimplemented.
 	 */
 	public void saveExtraData() {
+
 	}
 
 	/**
@@ -407,6 +437,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * unload every such chunk.
 	 */
 	public boolean unloadQueuedChunks() {
+
 		return false;
 	}
 
@@ -414,6 +445,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * Returns if the IChunkProvider supports saving.
 	 */
 	public boolean canSave() {
+
 		return true;
 	}
 
@@ -421,6 +453,7 @@ public class ChunkProviderDream implements IChunkProvider {
 	 * Converts the instance data to a readable string.
 	 */
 	public String makeString() {
+
 		return "RandomLevelSource";
 	}
 
@@ -430,22 +463,49 @@ public class ChunkProviderDream implements IChunkProvider {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {
+
 		BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(par2, par4);
 		return var5.getSpawnableList(par1EnumCreatureType);
 	}
 
 	public ChunkPosition func_147416_a(World p_147416_1_, String p_147416_2_, int p_147416_3_, int p_147416_4_, int p_147416_5_) {
+
 		return null;
 	}
 
 	public int getLoadedChunkCount() {
+
 		return 0;
 	}
 
 	public void recreateStructures(int par1, int par2) {
+
 		if (this.mapFeaturesEnabled) {
 			// this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1,
 			// par2, (Block[]) null);
 		}
+	}
+
+	public boolean generateDreamOre(Block ore, World world, Random rand, int i, int k, int vein, int count, int minY, int maxY) {
+
+		maxY = maxY <= 240 ? maxY : 240;
+		minY = minY >= 4 ? minY : 4;
+		maxY = maxY >= minY ? maxY : minY + 1;
+		minY = minY <= maxY ? minY : maxY - 1;
+
+		
+		
+		int range = maxY - minY;
+
+		for (int l = 0; l < count; l++) {
+			int x = i + rand.nextInt(16);
+			int y = minY + rand.nextInt(range);
+			int z = k + rand.nextInt(16);
+			(new WorldGenCustomMinable(ore, vein, DimBlocks.BlockLightStone)).generate(world, rand, x, y, z);
+			(new WorldGenCustomMinable(ore, vein, Blocks.hardened_clay)).generate(world, rand, x, y, z);
+		}
+
+		return true;
+
 	}
 }

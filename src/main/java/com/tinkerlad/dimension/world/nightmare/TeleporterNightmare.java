@@ -14,8 +14,6 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-import com.tinkerlad.dimension.block.DimBlocks;
-
 public class TeleporterNightmare extends Teleporter {
 	private final WorldServer	worldServerInstance;
 
@@ -54,7 +52,7 @@ public class TeleporterNightmare extends Teleporter {
 						int l1 = j + j1;
 						int i2 = k + i1 * b1 - l * b0;
 						boolean flag = j1 < 0;
-						this.worldServerInstance.setBlock(k1, l1, i2, flag ? Blocks.sandstone : Blocks.air);
+						this.worldServerInstance.setBlock(k1, l1, i2, flag ? Blocks.air : Blocks.air);
 					}
 				}
 			}
@@ -97,8 +95,8 @@ public class TeleporterNightmare extends Teleporter {
 					double d6 = (double) l1 + 0.5D - par1Entity.posZ;
 
 					for (int i2 = this.worldServerInstance.getActualHeight() - 1; i2 >= 0; --i2) {
-						if (this.worldServerInstance.getBlock(k1, i2, l1) == DimBlocks.BlockDebug) {
-							while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == DimBlocks.BlockDebug) {
+						if (this.worldServerInstance.getBlock(k1, i2, l1) == Blocks.air) {
+							while (this.worldServerInstance.getBlock(k1, i2 - 1, l1) == Blocks.air) {
 								--i2;
 							}
 
@@ -129,19 +127,19 @@ public class TeleporterNightmare extends Teleporter {
 			d4 = (double) k + 0.5D;
 			int j2 = -1;
 
-			if (this.worldServerInstance.getBlock(i - 1, j, k) == DimBlocks.BlockDebug) {
+			if (this.worldServerInstance.getBlock(i - 1, j, k) == Blocks.air) {
 				j2 = 2;
 			}
 
-			if (this.worldServerInstance.getBlock(i + 1, j, k) == DimBlocks.BlockDebug) {
+			if (this.worldServerInstance.getBlock(i + 1, j, k) == Blocks.air) {
 				j2 = 0;
 			}
 
-			if (this.worldServerInstance.getBlock(i, j, k - 1) == DimBlocks.BlockDebug) {
+			if (this.worldServerInstance.getBlock(i, j, k - 1) == Blocks.air) {
 				j2 = 3;
 			}
 
-			if (this.worldServerInstance.getBlock(i, j, k + 1) == DimBlocks.BlockDebug) {
+			if (this.worldServerInstance.getBlock(i, j, k + 1) == Blocks.air) {
 				j2 = 1;
 			}
 
@@ -376,7 +374,7 @@ public class TeleporterNightmare extends Teleporter {
 						j3 = j5 + l2;
 						i4 = j2 + (i3 - 1) * l5 - k2 * k5;
 						flag = l2 < 0;
-						this.worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.sandstone : Blocks.air);
+						this.worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.air : Blocks.air);
 					}
 				}
 			}
@@ -389,7 +387,7 @@ public class TeleporterNightmare extends Teleporter {
 					j3 = j5 + l2;
 					i4 = j2 + (i3 - 1) * l5;
 					flag = i3 == 0 || i3 == 3 || l2 == -1 || l2 == 3;
-					this.worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.sandstone : DimBlocks.BlockDebug, 0, 2);
+					this.worldServerInstance.setBlock(k3, j3, i4, flag ? Blocks.air : Blocks.air, 0, 2);
 				}
 			}
 

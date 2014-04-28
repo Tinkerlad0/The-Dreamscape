@@ -14,15 +14,10 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 import com.tinkerlad.dimension.reference.ItemInfo;
-import com.tinkerlad.dimension.world.Dimension;
-import com.tinkerlad.dimension.world.dream.diamondTree.DiamondTree;
-import com.tinkerlad.dimension.world.nightmare.TeleporterNightmare;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -40,57 +35,41 @@ public class ItemDebug extends ItemPossession {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world,
- EntityPlayer par5Entity) {
-
-		DiamondTree.generate(world, world.rand, (int) par5Entity.posX, (int) par5Entity.posY, (int) par5Entity.posZ);
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer par5Entity) {
 
 		return stack;
-		// if (par5Entity.isSneaking()) {
-		// teleport(par5Entity, Dimension.nightmareID);
-		// } else {
-		// teleport(par5Entity, Dimension.dreamID);
-		// }
-		//
-		// return stack;
 	}
 
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+
+		for (int i = -5; i <= 5; i++) {
+			for (int j = -5; j <= 5; j++) {
+				for (int k = -5; k <= 5; k++) {
+					if (player.worldObj.getBlock(x - i, y - j, z - k) == player.worldObj.getBlock(x, y, z)) {
+
+						// Possession.packetPipeline.sendToAll(new
+						// SleptInBedPacket(x - i, y - j, z - k));
+						world.setBlockToAir(x - i, y - j, z - k);
+					}
+				}
+			}
+		}
+
+		return true;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 
-		this.itemIcon = register.registerIcon(ItemInfo.TEXTURE_LOCATION
-				+ ItemInfo.DEBUG_ICON);
+		this.itemIcon = register.registerIcon(ItemInfo.TEXTURE_LOCATION + ItemInfo.DEBUG_ICON);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, EntityPlayer player, List info,
-			boolean useExtraInformation) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean useExtraInformation) {
 
-		info.add("This item is for DEBUGGING only.... atm");
+		info.add("This item is for DEBUGGING only");
 	}
-
-	private void teleport(EntityPlayer par5Entity, int dimID) {
-
-		if ((par5Entity.ridingEntity == null) && (par5Entity.riddenByEntity == null) && ((par5Entity instanceof EntityPlayerMP))) {
-			EntityPlayerMP player = (EntityPlayerMP) par5Entity;
-
-			MinecraftServer mServer = MinecraftServer.getServer();
-
-			if (player.timeUntilPortal > 0) {
-				player.timeUntilPortal = 10;
-			} else if (player.dimension != dimID) {
-				player.timeUntilPortal = 10;
-
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, dimID, new TeleporterNightmare(mServer.worldServerForDimension(Dimension.nightmareID)));
-			} else {
-				player.timeUntilPortal = 10;
-				player.mcServer.getConfigurationManager().transferPlayerToDimension(player, 0);
-			}
-		}
-
-}
 }

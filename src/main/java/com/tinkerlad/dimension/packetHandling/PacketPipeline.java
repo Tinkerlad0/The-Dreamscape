@@ -18,6 +18,8 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
 
+import com.tinkerlad.dimension.packetHandling.packets.BreakBlockPacket;
+import com.tinkerlad.dimension.packetHandling.packets.SleptInBedPacket;
 import com.tinkerlad.dimension.reference.ModInfo;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -250,5 +252,6 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	public void registerPackets() {
 
 		registerPacket(SleptInBedPacket.class);
+		registerPacket(BreakBlockPacket.class);
 	}
 }

@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
 import com.tinkerlad.dimension.Possession;
-import com.tinkerlad.dimension.packetHandling.SleptInBedPacket;
+import com.tinkerlad.dimension.packetHandling.packets.SleptInBedPacket;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.Event;
@@ -40,6 +40,7 @@ public class SleepTimer {
 		if (enabled) {
 			this.ticked++;
 			if (this.ticked == this.ticksRequired) {
+
 				Possession.packetPipeline.sendToServer(new SleptInBedPacket());
 				FMLCommonHandler.instance().bus().unregister(this);
 

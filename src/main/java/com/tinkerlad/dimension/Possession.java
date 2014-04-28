@@ -10,6 +10,8 @@
  ******************************************************************************/
 package com.tinkerlad.dimension;
 
+import java.io.IOException;
+
 import net.minecraftforge.common.MinecraftForge;
 
 import com.tinkerlad.dimension.block.DimBlocks;
@@ -27,6 +29,7 @@ import com.tinkerlad.dimension.reference.ModInfo;
 import com.tinkerlad.dimension.tileEntities.TileDimBed;
 import com.tinkerlad.dimension.utils.FMLEventReciever;
 import com.tinkerlad.dimension.utils.ForgeEventReciever;
+import com.tinkerlad.dimension.utils.GlobalStorage;
 import com.tinkerlad.dimension.utils.Utils;
 import com.tinkerlad.dimension.world.Dimension;
 
@@ -38,7 +41,9 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
@@ -53,10 +58,11 @@ public class Possession {
 	public static final PacketPipeline	packetPipeline	= new PacketPipeline();
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event) throws ClassNotFoundException, IOException {
 
 		LogHelper.logger = event.getModLog();
 
+		GlobalStorage.init(event.getModConfigurationDirectory());
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		TabHandler.init();
 
@@ -95,4 +101,17 @@ public class Possession {
 
 		event.registerServerCommand(new PossessionCommand());
 	}
+
+	@EventHandler
+	public void serverStarted(FMLServerStartedEvent event) {
+
+
+	}
+
+	@EventHandler
+	public void serverStopping(FMLServerStoppingEvent event) throws IOException {
+
+		System.out.println(GlobalStorage.saveToFile() ? "Saved Inventories Correctly" : "Did not save correctly");
+	}
+
 }

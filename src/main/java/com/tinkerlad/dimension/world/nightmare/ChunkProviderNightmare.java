@@ -157,9 +157,9 @@ public class ChunkProviderNightmare implements IChunkProvider {
 
 							for (int k3 = 0; k3 < 4; ++k3) {
 								if ((d15 += d16) > 0.0D) {
-									blocks[j3 += short1] = Blocks.sandstone;
+									blocks[j3 += short1] = Blocks.sand;
 								} else if (k2 * 8 + l2 < b0) {
-									blocks[j3 += short1] = Blocks.sandstone;
+									blocks[j3 += short1] = Blocks.sand;
 								} else {
 									blocks[j3 += short1] = Blocks.air;
 								}

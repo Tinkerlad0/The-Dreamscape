@@ -16,6 +16,8 @@ import org.apache.logging.log4j.Level;
 
 import com.tinkerlad.dimension.block.dream.BlockDiamondLeaves;
 import com.tinkerlad.dimension.block.dream.BlockDiamondWood;
+import com.tinkerlad.dimension.block.nightmare.BlockHardenedOre;
+import com.tinkerlad.dimension.block.ore.BlockRubyOre;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.BlockInfo;
 
@@ -25,11 +27,14 @@ public class DimBlocks {
 
 	public static Block BedTimer;
 	public static Block BlockLightStone;
-	public static Block	BlockDimBed;
+	public static Block	BlockRubyOre;
 	
 	// DreamBlocks
 	public static Block	BlockDiamondLeaves;
 	public static Block	BlockDiamondWood;
+
+	// NightmareBlocks
+	public static Block	BlockHardenedOre;
 
 	public static Block	BlockDebug;
 
@@ -46,6 +51,12 @@ public class DimBlocks {
 		BlockDiamondWood = new BlockDiamondWood();
 		GameRegistry.registerBlock(BlockDiamondWood, BlockInfo.DIA_WOOD_ULOCALIZED_NAME);
 		
+		BlockHardenedOre = new BlockHardenedOre();
+		GameRegistry.registerBlock(BlockHardenedOre, BlockInfo.HARDENED_ORE_ULOCALIZED_NAME);
+
+		BlockRubyOre = new BlockRubyOre();
+		GameRegistry.registerBlock(BlockRubyOre, BlockInfo.RUBY_ULOCALIZED_NAME);
+
 		BlockDebug = new BlockDebug();
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
 

@@ -101,7 +101,8 @@ public class WorldProviderNightmare extends WorldProvider {
 		float f = 0.0F;
 
 		for (int i = 0; i <= 15; ++i) {
-			float f1 = 0.6F;
+			float f1 = 1.0F - (float) i / 15.0F;
+			f1 = f1 < 0.6F ? f1 : 0.6F;
 			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * (1.0F - f) + f;
 		}
 	}
