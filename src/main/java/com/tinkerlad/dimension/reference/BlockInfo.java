@@ -53,4 +53,13 @@ public class BlockInfo {
 	public static final String	HARDENED_ORE_NAME				= "Hardened Ore";
 	public static final String	HARDENED_ORE_TEXTURE			= "hardenedOre";
 
+	// BlockFreakSand
+	public static final String	FSAND_ULOCALIZED_NAME			= "sandFreak";
+	public static final String	FSAND_NAME						= "Freak Sand";
+	public static final String	FSAND_TEXTURE					= "sand";
+
+	// BlockBedrockBreakable
+	public static final String	BEDROCK_ULOCALIZED_NAME			= "bedrockBreakable";
+	public static final String	BEDROCK_TEXTURE					= "Bedrock";
+
 }

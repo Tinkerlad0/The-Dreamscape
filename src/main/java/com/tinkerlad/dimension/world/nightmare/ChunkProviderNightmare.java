@@ -29,6 +29,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+
+import com.tinkerlad.dimension.block.DimBlocks;
+
 import cpw.mods.fml.common.eventhandler.Event.Result;
 
 public class ChunkProviderNightmare implements IChunkProvider {
@@ -157,9 +160,9 @@ public class ChunkProviderNightmare implements IChunkProvider {
 
 							for (int k3 = 0; k3 < 4; ++k3) {
 								if ((d15 += d16) > 0.0D) {
-									blocks[j3 += short1] = Blocks.sand;
+									blocks[j3 += short1] = DimBlocks.BlockFreakySand;
 								} else if (k2 * 8 + l2 < b0) {
-									blocks[j3 += short1] = Blocks.sand;
+									blocks[j3 += short1] = DimBlocks.BlockFreakySand;
 								} else {
 									blocks[j3 += short1] = Blocks.air;
 								}

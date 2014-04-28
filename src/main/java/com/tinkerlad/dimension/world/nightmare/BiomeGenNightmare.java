@@ -11,6 +11,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import com.tinkerlad.dimension.entity.nightmare.EntityExitGuard;
 
 public class BiomeGenNightmare extends BiomeGenBase {
+
+	@SuppressWarnings("unchecked")
 	public BiomeGenNightmare(int par1) {
 		super(par1);
 		this.spawnableCreatureList.clear();

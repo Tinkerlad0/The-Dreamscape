@@ -21,9 +21,7 @@ public class FMLEventReciever {
 
 		WorldServer worldserver = MinecraftServer.getServer().worldServerForDimension(0);
 		long time = worldserver.getWorldTime();
-		System.out.println(time);
 		if (cooldown == 0) {
-			System.out.println(time);
 			if ((time % 24000L) > 0 && time % 24000 < 1000) {
 				wakeUpDreamers(Dimension.dreamID);
 				wakeUpDreamers(Dimension.nightmareID);
