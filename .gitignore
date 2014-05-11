@@ -6,6 +6,4 @@
 !/gradlew.bat
 !/README.md
 !/License.txt
-!/build.gradle
-!/build.bat
-!/build.sh
+!/forge*.*
