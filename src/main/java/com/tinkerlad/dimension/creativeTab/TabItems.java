@@ -4,7 +4,7 @@
  * are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Tinkerlad - initial concept and implementation
  ******************************************************************************/
@@ -16,7 +16,7 @@ import net.minecraft.item.Item;
 
 public class TabItems extends CreativeTabs {
 
-	public static final CreativeTabs	tabPossession	= new TabItems("The Dimension");
+	public static final CreativeTabs tabPossession = new TabItems("The Dimension");
 
 	public TabItems(String name) {
 
@@ -24,14 +24,13 @@ public class TabItems extends CreativeTabs {
 	}
 
 	@Override
-	public Item getTabIconItem() {
-		// TODO Auto-generated method stub
-		return Items.nether_star;
-	}
-
-	@Override
 	public String getTranslatedTabLabel() {
 
 		return "The Dimension";
+	}
+
+	@Override
+	public Item getTabIconItem() {
+		return Items.nether_star;
 	}
 }

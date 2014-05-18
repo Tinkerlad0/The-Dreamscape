@@ -24,11 +24,9 @@ public class SleepTimer {
 
 	@SubscribeEvent
 	public void onServerTick(ServerTickEvent event) {
-		System.out.println("ticking");
 		if (enabled) {
 			this.ticked++;
 			if (this.ticked == this.ticksRequired) {
-
 				this.player.wakeUpPlayer(false, false, false);
 				Random rand = new Random(player.ticksExisted);
 				int dim = 36 + rand.nextInt(1);

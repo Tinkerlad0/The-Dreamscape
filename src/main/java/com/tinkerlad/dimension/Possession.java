@@ -4,15 +4,11 @@
  * are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
+ *
  * Contributors:
  *     Tinkerlad - initial concept and implementation
  ******************************************************************************/
 package com.tinkerlad.dimension;
-
-import java.io.IOException;
-
-import net.minecraftforge.common.MinecraftForge;
 
 import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.command.PossessionCommand;
@@ -32,37 +28,34 @@ import com.tinkerlad.dimension.utils.ForgeEventReciever;
 import com.tinkerlad.dimension.utils.GlobalStorage;
 import com.tinkerlad.dimension.utils.Utils;
 import com.tinkerlad.dimension.world.Dimension;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.event.FMLServerStoppingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.MinecraftForge;
+
+import java.io.File;
+import java.io.IOException;
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
 public class Possession {
 
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
 	@Instance(ModInfo.ID)
-	public static Possession	instance;
-
+	public static Possession instance;
 	@SidedProxy(clientSide = "com.tinkerlad.dimension.proxies.ClientProxy", serverSide = "com.tinkerlad.dimension.proxies.CommonProxy")
-	public static CommonProxy	proxy;
-
-	public static final PacketPipeline	packetPipeline	= new PacketPipeline();
+	public static CommonProxy proxy;
+	public static GlobalStorage storedInv;
+	public static File configDir;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws ClassNotFoundException, IOException {
 
 		LogHelper.logger = event.getModLog();
-
-		GlobalStorage.init(event.getModConfigurationDirectory());
+		configDir = event.getSuggestedConfigurationFile();
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		TabHandler.init();
 
@@ -103,9 +96,9 @@ public class Possession {
 	}
 
 	@EventHandler
-	public void serverStarted(FMLServerStartedEvent event) {
+	public void serverStarted(FMLServerStartedEvent event) throws IOException, ClassNotFoundException {
 
-
+		storedInv = new GlobalStorage(configDir);
 	}
 
 	@EventHandler
@@ -113,5 +106,4 @@ public class Possession {
 
 		System.out.println(GlobalStorage.saveToFile() ? "Saved Inventories Correctly" : "Did not save correctly");
 	}
-
 }

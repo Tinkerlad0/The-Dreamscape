@@ -1,10 +1,5 @@
 package com.tinkerlad.dimension.world.nightmare;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.Direction;
@@ -14,14 +9,22 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.WorldServer;
 
-public class TeleporterNightmare extends Teleporter {
-	private final WorldServer	worldServerInstance;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
-	/** A private Random() function in Teleporter */
-	private final Random		random;
-	private final LongHashMap	field_85191_c	= new LongHashMap();
+public class TeleporterNightmare extends Teleporter {
+
+	private final WorldServer worldServerInstance;
+
+	/**
+	 * A private Random() function in Teleporter
+	 */
+	private final Random random;
+	private final LongHashMap field_85191_c = new LongHashMap();
 	@SuppressWarnings("rawtypes")
-	private final List			field_85190_d	= new ArrayList();
+	private final List field_85190_d = new ArrayList();
 
 	public TeleporterNightmare(WorldServer par1WorldServer) {
 		super(par1WorldServer);
@@ -117,7 +120,6 @@ public class TeleporterNightmare extends Teleporter {
 
 		if (d3 >= 0.0D) {
 			if (flag) {
-				// TODO ERROR?
 				this.field_85191_c.add(j1, new PortalPosition(i, j, k, this.worldServerInstance.getTotalWorldTime()));
 				this.field_85190_d.add(Long.valueOf(j1));
 			}
@@ -249,7 +251,7 @@ public class TeleporterNightmare extends Teleporter {
 
 			for (j2 = k - b0; j2 <= k + b0; ++j2) {
 				d2 = (double) j2 + 0.5D - par1Entity.posZ;
-				label274:
+label274:
 
 				for (k2 = this.worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2) {
 					if (this.worldServerInstance.isAirBlock(i2, k2, j2)) {
@@ -302,7 +304,7 @@ public class TeleporterNightmare extends Teleporter {
 
 				for (j2 = k - b0; j2 <= k + b0; ++j2) {
 					d2 = (double) j2 + 0.5D - par1Entity.posZ;
-					label222:
+label222:
 
 					for (k2 = this.worldServerInstance.getActualHeight() - 1; k2 >= 0; --k2) {
 						if (this.worldServerInstance.isAirBlock(i2, k2, j2)) {
