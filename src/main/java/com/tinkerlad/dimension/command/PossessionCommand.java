@@ -1,17 +1,20 @@
-/*******************************************************************************
- * Copyright (c) 2013 Tinkerlad
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * 
- * Contributors:
- *     Tinkerlad - initial concept and implementation
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
+
 package com.tinkerlad.dimension.command;
 
-import java.util.Hashtable;
-
+import com.tinkerlad.dimension.reference.ModInfo;
+import com.tinkerlad.dimension.utils.Utils;
+import com.tinkerlad.dimension.world.Dimension;
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -19,11 +22,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 
-import com.tinkerlad.dimension.reference.ModInfo;
-import com.tinkerlad.dimension.utils.Utils;
-import com.tinkerlad.dimension.world.Dimension;
-
-import cpw.mods.fml.common.FMLCommonHandler;
+import java.util.Hashtable;
 
 public class PossessionCommand extends CommandBase {
 
@@ -42,8 +41,9 @@ public class PossessionCommand extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender sender, String[] arguments) {
 
-		if (arguments.length <= 0)
+		if (arguments.length <= 0) {
 			throw new WrongUsageException("Type '" + this.getCommandUsage(sender) + " help" + "' for help.");
+		}
 
 		if (arguments[0].matches("version")) {
 			commandVersion(sender, arguments);
@@ -95,26 +95,20 @@ public class PossessionCommand extends CommandBase {
 		long[] svTicks = serverTickArray;
 		int size = serverTickArray.length;
 
-		for (int i = 0; i < size; i++)
-			sum += svTicks[i];
+		for (int i = 0; i < size; i++) { sum += svTicks[i]; }
 
 		return (double) sum / (double) size;
 	}
 
 	private String textColor(double tps) {
 
-		if (tps >= 15)
-			return "\u00a72";
-		else if (tps >= 10 && tps < 15)
-			return "\u00a7e";
-		else
+		if (tps >= 15) { return "\u00a72"; } else if (tps >= 10 && tps < 15) { return "\u00a7e"; } else {
 			return "\u00a74";
+		}
 	}
 
 	private void commandVersion(ICommandSender sender, String[] arguments) {
 
 		sender.addChatMessage(new ChatComponentText("Version" + " " + ModInfo.VERSION + " " + ModInfo.RELEASE));
-
 	}
-
 }

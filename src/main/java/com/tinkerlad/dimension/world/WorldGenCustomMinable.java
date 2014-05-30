@@ -1,20 +1,37 @@
-package com.tinkerlad.dimension.world;
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
 
-import java.util.Random;
+package com.tinkerlad.dimension.world;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import java.util.Random;
+
 public class WorldGenCustomMinable extends WorldGenerator {
 
-	/** The block ID of the ore to be placed using this generator. */
-	private Block	minableBlock;
-	/** The number of blocks to generate. */
-	private int		numberOfBlocks;
-	/** The Block to replace */
-	private Block	targetBlock;
+	/**
+	 * The block ID of the ore to be placed using this generator.
+	 */
+	private Block minableBlock;
+	/**
+	 * The number of blocks to generate.
+	 */
+	private int numberOfBlocks;
+	/**
+	 * The Block to replace
+	 */
+	private Block targetBlock;
 
 	public WorldGenCustomMinable(Block par1, int par2, Block par3) {
 
@@ -66,5 +83,4 @@ public class WorldGenCustomMinable extends WorldGenerator {
 		}
 		return true;
 	}
-
 }

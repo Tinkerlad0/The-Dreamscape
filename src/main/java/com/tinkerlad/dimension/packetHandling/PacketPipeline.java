@@ -1,27 +1,19 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.packetHandling;
-
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.MessageToMessageCodec;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.NetHandlerPlayServer;
 
 import com.tinkerlad.dimension.packetHandling.packets.BreakBlockPacket;
 import com.tinkerlad.dimension.packetHandling.packets.SleptInBedPacket;
 import com.tinkerlad.dimension.reference.ModInfo;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
 import cpw.mods.fml.common.network.FMLOutboundHandler;
@@ -29,30 +21,40 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageCodec;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
+
+import java.util.*;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by
  * the packets themselves.
- * 
+ *
  * @author sirgingalot some code from: cpw
  */
 @ChannelHandler.Sharable
 public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
 
-	private EnumMap<Side, FMLEmbeddedChannel>			channels;
-	private LinkedList<Class<? extends AbstractPacket>>	packets				= new LinkedList<Class<? extends AbstractPacket>>();
-	private boolean										isPostInitialised	= false;
+	private EnumMap<Side, FMLEmbeddedChannel> channels;
+	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
+	private boolean isPostInitialised = false;
 
 	/**
 	 * Register your packet with the pipeline. Discriminators are automatically
 	 * set.
-	 * 
-	 * @param clazz
-	 *            the class to register
-	 * 
+	 *
+	 * @param clazz the class to register
 	 * @return whether registration was successful. Failure may occur if 256
-	 *         packets have been registered or if the registry already contains
-	 *         this packet
+	 * packets have been registered or if the registry already contains
+	 * this packet
 	 */
 	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
 
@@ -168,9 +170,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * <p/>
 	 * Adapted from CPW's code in
 	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
+	 *
+	 * @param message The message to send
 	 */
 	public void sendToAll(AbstractPacket message) {
 
@@ -183,11 +184,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * <p/>
 	 * Adapted from CPW's code in
 	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param player
-	 *            The player to send it to
+	 *
+	 * @param message The message to send
+	 * @param player  The player to send it to
 	 */
 	public void sendTo(AbstractPacket message, EntityPlayerMP player) {
 
@@ -201,13 +200,11 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * <p/>
 	 * Adapted from CPW's code in
 	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param point
-	 *            The
-	 *            {@link cpw.mods.fml.common.network.NetworkRegistry.TargetPoint}
-	 *            around which to send
+	 *
+	 * @param message The message to send
+	 * @param point   The
+	 *                {@link cpw.mods.fml.common.network.NetworkRegistry.TargetPoint}
+	 *                around which to send
 	 */
 	public void sendToAllAround(AbstractPacket message, NetworkRegistry.TargetPoint point) {
 
@@ -221,11 +218,9 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * <p/>
 	 * Adapted from CPW's code in
 	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 * @param dimensionId
-	 *            The dimension id to target
+	 *
+	 * @param message     The message to send
+	 * @param dimensionId The dimension id to target
 	 */
 	public void sendToDimension(AbstractPacket message, int dimensionId) {
 
@@ -239,9 +234,8 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
 	 * <p/>
 	 * Adapted from CPW's code in
 	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
+	 *
+	 * @param message The message to send
 	 */
 	public void sendToServer(AbstractPacket message) {
 

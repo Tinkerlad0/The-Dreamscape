@@ -1,12 +1,22 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.block.nightmare;
-
-import java.util.Random;
-
-import net.minecraft.block.material.Material;
-import net.minecraft.world.World;
 
 import com.tinkerlad.dimension.block.BlockGeneric;
 import com.tinkerlad.dimension.reference.BlockInfo;
+import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockFreakSand extends BlockGeneric {
 
@@ -16,7 +26,6 @@ public class BlockFreakSand extends BlockGeneric {
 		setBlockName(BlockInfo.FSAND_ULOCALIZED_NAME);
 		setBlockTextureName(BlockInfo.TEXTURE_LOCATION + BlockInfo.FSAND_TEXTURE);
 		setTickRandomly(true);
-
 	}
 
 	@Override
@@ -37,6 +46,5 @@ public class BlockFreakSand extends BlockGeneric {
 	public int tickRate(World world) {
 
 		return 5;
-
 	}
 }

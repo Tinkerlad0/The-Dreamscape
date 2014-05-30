@@ -1,13 +1,14 @@
-/*******************************************************************************
- * Copyright (c) 2013 Tinkerlad
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *
- * Contributors:
- *     Tinkerlad - initial concept and implementation
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
+
 package com.tinkerlad.dimension;
 
 import com.tinkerlad.dimension.block.DimBlocks;
@@ -21,12 +22,10 @@ import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.packetHandling.PacketPipeline;
 import com.tinkerlad.dimension.proxies.ClientProxy;
 import com.tinkerlad.dimension.proxies.CommonProxy;
+import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.reference.ModInfo;
-import com.tinkerlad.dimension.tileEntities.TileDimBed;
-import com.tinkerlad.dimension.utils.FMLEventReciever;
-import com.tinkerlad.dimension.utils.ForgeEventReciever;
-import com.tinkerlad.dimension.utils.GlobalStorage;
-import com.tinkerlad.dimension.utils.Utils;
+import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
+import com.tinkerlad.dimension.utils.*;
 import com.tinkerlad.dimension.world.Dimension;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -70,9 +69,9 @@ public class Possession {
 		}
 
 		ClientProxy.registerRenderThings();
-		GameRegistry.registerTileEntity(TileDimBed.class, "tileDimBed");
+		GameRegistry.registerTileEntity(TileGlobalStorage.class, BlockInfo.GLOBAL_ULOCALIZED_NAME);
 
-		DimItem.addRecipes();
+		Recipes.addRecipes();
 		MinecraftForge.EVENT_BUS.register(new ForgeEventReciever());
 		FMLCommonHandler.instance().bus().register(new FMLEventReciever());
 	}

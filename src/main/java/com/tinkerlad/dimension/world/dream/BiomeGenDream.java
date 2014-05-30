@@ -1,16 +1,27 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.world.dream;
 
-import java.util.Random;
-
+import com.tinkerlad.dimension.block.DimBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 
-import com.tinkerlad.dimension.block.DimBlocks;
+import java.util.Random;
 
 public class BiomeGenDream extends BiomeGenBase {
+
 	public BiomeGenDream(int par1) {
 		super(par1);
 		this.spawnableCreatureList.clear();
@@ -24,9 +35,7 @@ public class BiomeGenDream extends BiomeGenBase {
 		this.theBiomeDecorator.deadBushPerChunk = 0;
 		this.theBiomeDecorator.clayPerChunk = 5;
 		this.theBiomeDecorator.treesPerChunk = 2;
-		this.setHeight(new BiomeGenBase.Height(-0.5F, 2F));
-
-
+		this.setHeight(new BiomeGenBase.Height(-0.01F, 0.3F));
 	}
 
 	public void genTerrainBlocks(World p_150573_1_, Random p_150573_2_, Block[] p_150573_3_, byte[] p_150573_4_, int p_150573_5_, int p_150573_6_, double p_150573_7_) {

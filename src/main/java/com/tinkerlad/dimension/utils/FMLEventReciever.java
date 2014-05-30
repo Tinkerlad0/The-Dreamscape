@@ -1,20 +1,29 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.utils;
 
+import com.tinkerlad.dimension.world.Dimension;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
 
-import com.tinkerlad.dimension.world.Dimension;
-
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-
 public class FMLEventReciever {
 
-	int	cooldown	= 0;
+	int cooldown = 0;
 
 	@SubscribeEvent(priority = EventPriority.NORMAL)
 	public void onServerTick(ServerTickEvent event) {
@@ -23,7 +32,7 @@ public class FMLEventReciever {
 		long time = worldserver.getWorldTime();
 		if (cooldown == 0) {
 			if ((time % 24000L) > 0 && time % 24000 < 1000) {
-				wakeUpDreamers(Dimension.dreamID);
+				//wakeUpDreamers(Dimension.dreamID);
 				wakeUpDreamers(Dimension.nightmareID);
 				System.out.println("WAKE UP GEOFF");
 				cooldown = 2200;
@@ -52,9 +61,7 @@ public class FMLEventReciever {
 					player.addChatMessage(new ChatComponentText("You have no saved inventory"));
 				}
 				Utils.teleport(player, 0);
-
 			}
 		}
 	}
-
 }

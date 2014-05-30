@@ -1,12 +1,18 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.world.nightmare;
 
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
-
-import java.util.List;
-import java.util.Random;
-
+import com.tinkerlad.dimension.block.DimBlocks;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -30,59 +36,64 @@ import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
-import com.tinkerlad.dimension.block.DimBlocks;
+import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 
 public class ChunkProviderNightmare implements IChunkProvider {
-	/**
-	 * RNG.
-	 */
-	private Random					rand;
-	private NoiseGeneratorOctaves	field_147431_j;
-	private NoiseGeneratorOctaves	field_147432_k;
-	private NoiseGeneratorOctaves	field_147429_l;
-	private NoiseGeneratorPerlin	field_147430_m;
-	/**
-	 * A NoiseGeneratorOctaves used in generating terrain
-	 */
-	public NoiseGeneratorOctaves	noiseGen5;
-	/**
-	 * A NoiseGeneratorOctaves used in generating terrain
-	 */
-	public NoiseGeneratorOctaves	noiseGen6;
-	public NoiseGeneratorOctaves	mobSpawnerNoise;
-	/**
-	 * Reference to the World object.
-	 */
-	private World					worldObj;
+
 	/**
 	 * are map structures going to be generated (e.g. strongholds)
 	 */
-	private final boolean			mapFeaturesEnabled;
-	private WorldType				field_147435_p;
-	private final double[]			field_147434_q;
-	private final float[]			parabolicField;
-	private double[]				stoneNoise			= new double[256];
-	private MapGenBase				caveGenerator		= new MapGenCavesNightmare();
-	private MapGenMineshaft			mineshaftGenerator	= new MapGenMineshaft();
-	private MapGenBase				ravineGenerator		= new MapGenRavineNightmare();
+	private final boolean mapFeaturesEnabled;
+	private final double[] field_147434_q;
+	private final float[] parabolicField;
+	/**
+	 * A NoiseGeneratorOctaves used in generating terrain
+	 */
+	public NoiseGeneratorOctaves noiseGen5;
+	/**
+	 * A NoiseGeneratorOctaves used in generating terrain
+	 */
+	public NoiseGeneratorOctaves noiseGen6;
+	public NoiseGeneratorOctaves mobSpawnerNoise;
+	double[] field_147427_d;
+	double[] field_147428_e;
+	double[] field_147425_f;
+	double[] field_147426_g;
+	int[][] field_73219_j = new int[32][32];
+
+	{
+		//caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
+		// mineshaftGenerator = (MapGenMineshaftNightmare)
+		// TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
+		//ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
+	}
+
+	/**
+	 * RNG.
+	 */
+	private Random rand;
+	private NoiseGeneratorOctaves field_147431_j;
+	private NoiseGeneratorOctaves field_147432_k;
+	private NoiseGeneratorOctaves field_147429_l;
+	private NoiseGeneratorPerlin field_147430_m;
+	/**
+	 * Reference to the World object.
+	 */
+	private World worldObj;
+	private WorldType field_147435_p;
+	private double[] stoneNoise = new double[256];
+	private MapGenBase caveGenerator = new MapGenCavesNightmare();
+	private MapGenMineshaft mineshaftGenerator = new MapGenMineshaft();
+	private MapGenBase ravineGenerator = new MapGenRavineNightmare();
 	/**
 	 * The biomes that are used to generate the chunk
 	 */
-	private BiomeGenBase[]			biomesForGeneration;
-	double[]						field_147427_d;
-	double[]						field_147428_e;
-	double[]						field_147425_f;
-	double[]						field_147426_g;
-	int[][]							field_73219_j		= new int[32][32];
-
-	{
-		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-		// mineshaftGenerator = (MapGenMineshaftNightmare)
-		// TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
-		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
-	}
+	private BiomeGenBase[] biomesForGeneration;
 
 	public ChunkProviderNightmare(World par1World, long par2, boolean par4) {
 		this.worldObj = par1World;
@@ -106,7 +117,7 @@ public class ChunkProviderNightmare implements IChunkProvider {
 			}
 		}
 
-		NoiseGenerator[] noiseGens = { field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6, mobSpawnerNoise };
+		NoiseGenerator[] noiseGens = {field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6, mobSpawnerNoise};
 		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, this.rand, noiseGens);
 		this.field_147431_j = (NoiseGeneratorOctaves) noiseGens[0];
 		this.field_147432_k = (NoiseGeneratorOctaves) noiseGens[1];
@@ -166,7 +177,6 @@ public class ChunkProviderNightmare implements IChunkProvider {
 								} else {
 									blocks[j3 += short1] = Blocks.air;
 								}
-
 							}
 
 							d10 += d12;
@@ -186,8 +196,7 @@ public class ChunkProviderNightmare implements IChunkProvider {
 	public void replaceBlocksForBiome(int p_147422_1_, int p_147422_2_, Block[] p_147422_3_, byte[] p_147422_4_, BiomeGenBase[] p_147422_5_) {
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147422_1_, p_147422_2_, p_147422_3_, p_147422_5_);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == Result.DENY)
-			return;
+		if (event.getResult() == Result.DENY) { return; }
 
 		double d0 = 0.03125D;
 		this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (p_147422_1_ * 16), (double) (p_147422_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
@@ -200,47 +209,10 @@ public class ChunkProviderNightmare implements IChunkProvider {
 		}
 	}
 
-	/**
-	 * loads or generates the chunk at the chunk location specified
-	 */
-	public Chunk loadChunk(int par1, int par2) {
-		return this.provideChunk(par1, par2);
-	}
-
-	/**
-	 * Will return back a chunk, if it doesn't exist and its not a MP client it
-	 * will generates all the blocks for the specified chunk from the map seed
-	 * and chunk seed
-	 */
-	public Chunk provideChunk(int par1, int par2) {
-		this.rand.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
-		Block[] ablock = new Block[65536];
-		byte[] abyte = new byte[65536];
-		this.generateTerrain(par1, par2, ablock);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-		this.replaceBlocksForBiome(par1, par2, ablock, abyte, this.biomesForGeneration);
-		this.caveGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
-		this.ravineGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
-
-		if (this.mapFeaturesEnabled) {
-			this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
-		}
-
-		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, par1, par2);
-		byte[] abyte1 = chunk.getBiomeArray();
-
-		for (int k = 0; k < abyte1.length; ++k) {
-			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
-		}
-
-		chunk.generateSkylightMap();
-		return chunk;
-	}
-
 	private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_) {
 		this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, 200.0D, 200.0D, 0.5D);
 		this.field_147427_d = this.field_147429_l
-				.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
+				                      .generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 8.555150000000001D, 4.277575000000001D, 8.555150000000001D);
 		this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, 684.412D, 684.412D, 684.412D);
 		int l = 0;
@@ -345,6 +317,43 @@ public class ChunkProviderNightmare implements IChunkProvider {
 	}
 
 	/**
+	 * Will return back a chunk, if it doesn't exist and its not a MP client it
+	 * will generates all the blocks for the specified chunk from the map seed
+	 * and chunk seed
+	 */
+	public Chunk provideChunk(int par1, int par2) {
+		this.rand.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
+		Block[] ablock = new Block[65536];
+		byte[] abyte = new byte[65536];
+		this.generateTerrain(par1, par2, ablock);
+		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+		this.replaceBlocksForBiome(par1, par2, ablock, abyte, this.biomesForGeneration);
+		this.caveGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
+		this.ravineGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
+
+		if (this.mapFeaturesEnabled) {
+			this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
+		}
+
+		Chunk chunk = new Chunk(this.worldObj, ablock, abyte, par1, par2);
+		byte[] abyte1 = chunk.getBiomeArray();
+
+		for (int k = 0; k < abyte1.length; ++k) {
+			abyte1[k] = (byte) this.biomesForGeneration[k].biomeID;
+		}
+
+		chunk.generateSkylightMap();
+		return chunk;
+	}
+
+	/**
+	 * loads or generates the chunk at the chunk location specified
+	 */
+	public Chunk loadChunk(int par1, int par2) {
+		return this.provideChunk(par1, par2);
+	}
+
+	/**
 	 * Populates chunk with ores etc etc
 	 */
 	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
@@ -399,13 +408,6 @@ public class ChunkProviderNightmare implements IChunkProvider {
 	}
 
 	/**
-	 * Save extra data not associated with any Chunk. Not saved during autosave,
-	 * only during world unload. Currently unimplemented.
-	 */
-	public void saveExtraData() {
-	}
-
-	/**
 	 * Unloads chunks that are marked to be unloaded. This is not guaranteed to
 	 * unload every such chunk.
 	 */
@@ -449,5 +451,12 @@ public class ChunkProviderNightmare implements IChunkProvider {
 		if (this.mapFeaturesEnabled) {
 			this.mineshaftGenerator.func_151539_a(this, this.worldObj, par1, par2, (Block[]) null);
 		}
+	}
+
+	/**
+	 * Save extra data not associated with any Chunk. Not saved during autosave,
+	 * only during world unload. Currently unimplemented.
+	 */
+	public void saveExtraData() {
 	}
 }

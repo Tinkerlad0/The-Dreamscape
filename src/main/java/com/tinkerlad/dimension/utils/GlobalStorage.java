@@ -1,7 +1,20 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.utils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,11 +44,12 @@ public class GlobalStorage {
 
 	public static boolean saveToFile() throws IOException {
 
-		SerializeToFile.serialize(PLAYER_INVENTORY_STANDARD, SAVE_DIR);
+		NBTTagCompound nbt = new NBTTagCompound();
+
+
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static boolean readFromFile() throws IOException {
 
 		return true;

@@ -9,24 +9,12 @@
  * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
 
-package com.tinkerlad.dimension.world.nightmare;
+package com.tinkerlad.dimension.utils;
 
-import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructureStart;
-
-import java.util.Random;
-
-public class StructureMineshaftStartNightmare extends StructureStart {
-
-	public StructureMineshaftStartNightmare() {}
-
-	@SuppressWarnings("unchecked")
-	public StructureMineshaftStartNightmare(World par1World, Random par2Random, int par3, int par4) {
-		super(par3, par4);
-		StructureMineshaftPiecesNightmare.Room var5 = new StructureMineshaftPiecesNightmare.Room(0, par2Random, (par3 << 4) + 2, (par4 << 4) + 2);
-		this.components.add(var5);
-		var5.buildComponent(var5, this.components, par2Random);
-		this.updateBoundingBox();
-		this.markAvailableHeight(par1World, par2Random, 10);
-	}
+public class TODO {
+	//TODO //BEFORE NEXT RELEASE//
+	//todo DreamScape TopSoil
+	//todo Random Lightning Strikes in Nightmare Realm
+	//todo Implement BASIC 'Spawn' Buildings for Dreamscape and Nightmare Realm
+	//todo Loot chests randomly spawned on surface. or slightly buried... Possible new surface dungeon style.
 }

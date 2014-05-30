@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "tnkpos",
+  "name": "The DreamScape",
+  "description": "Where dreams and reality are not so far apart",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["Tinkerlad"],
+  "credits": "The members of the #minecraftforge irc channel for constant motivation and advice",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

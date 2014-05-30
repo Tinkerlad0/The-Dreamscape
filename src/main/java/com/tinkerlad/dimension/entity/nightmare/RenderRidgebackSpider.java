@@ -1,23 +1,31 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.entity.nightmare;
 
+import com.tinkerlad.dimension.reference.BlockInfo;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import com.tinkerlad.dimension.reference.BlockInfo;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderRidgebackSpider extends RenderLiving {
 
-	private static final ResourceLocation	spiderEyesTextures	= new ResourceLocation(BlockInfo.TEXTURE_LOCATION + "textures/model/ridgebackSpiderEyes.png");
-	private static final ResourceLocation	spiderTextures		= new ResourceLocation(BlockInfo.TEXTURE_LOCATION + "textures/model/ridgebackSpider.png");
+	private static final ResourceLocation spiderEyesTextures = new ResourceLocation(BlockInfo.TEXTURE_LOCATION + "textures/model/ridgebackSpiderEyes.png");
+	private static final ResourceLocation spiderTextures = new ResourceLocation(BlockInfo.TEXTURE_LOCATION + "textures/model/ridgebackSpider.png");
 
 	public RenderRidgebackSpider() {
 
@@ -67,17 +75,17 @@ public class RenderRidgebackSpider extends RenderLiving {
 		return spiderTextures;
 	}
 
-	protected float getDeathMaxRotation(EntityLivingBase par1EntityLivingBase) {
-
-		return this.getDeathMaxRotation((EntityRidgebackSpider) par1EntityLivingBase);
-	}
-
 	/**
 	 * Queries whether should render the specified pass or not.
 	 */
 	protected int shouldRenderPass(EntityLivingBase par1EntityLivingBase, int par2, float par3) {
 
 		return this.shouldRenderPass((EntityRidgebackSpider) par1EntityLivingBase, par2, par3);
+	}
+
+	protected float getDeathMaxRotation(EntityLivingBase par1EntityLivingBase) {
+
+		return this.getDeathMaxRotation((EntityRidgebackSpider) par1EntityLivingBase);
 	}
 
 	/**

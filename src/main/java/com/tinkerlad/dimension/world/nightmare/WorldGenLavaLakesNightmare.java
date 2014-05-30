@@ -1,6 +1,15 @@
-package com.tinkerlad.dimension.world.nightmare;
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
 
-import java.util.Random;
+package com.tinkerlad.dimension.world.nightmare;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -10,8 +19,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import java.util.Random;
+
 public class WorldGenLavaLakesNightmare extends WorldGenerator {
-	private Block	block;
+
+	private Block block;
 
 	public WorldGenLavaLakesNightmare(Block par1) {
 		this.block = par1;
@@ -64,9 +76,9 @@ public class WorldGenLavaLakesNightmare extends WorldGenerator {
 				for (var32 = 0; var32 < 16; ++var32) {
 					for (var10 = 0; var10 < 8; ++var10) {
 						var33 = !var6[(var8 * 16 + var32) * 8 + var10]
-								&& (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15
-										&& var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7
-										&& var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
+								        && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15
+										                                                                                                                                   && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7
+												                                                                                                                                                                                                                                               && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
 
 						if (var33) {
 							Material var12 = par1World.getBlock(par3 + var8, par4 + var10, par5 + var32).getMaterial();
@@ -97,7 +109,7 @@ public class WorldGenLavaLakesNightmare extends WorldGenerator {
 				for (var32 = 0; var32 < 16; ++var32) {
 					for (var10 = 4; var10 < 8; ++var10) {
 						if (var6[(var8 * 16 + var32) * 8 + var10] && par1World.getBlock(par3 + var8, par4 + var10 - 1, par5 + var32) == Blocks.dirt
-								&& par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + var8, par4 + var10, par5 + var32) > 0) {
+								    && par1World.getSavedLightValue(EnumSkyBlock.Sky, par3 + var8, par4 + var10, par5 + var32) > 0) {
 							BiomeGenBase var35 = par1World.getBiomeGenForCoords(par3 + var8, par5 + var32);
 
 							if (var35.topBlock == Blocks.mycelium) {
@@ -115,9 +127,9 @@ public class WorldGenLavaLakesNightmare extends WorldGenerator {
 					for (var32 = 0; var32 < 16; ++var32) {
 						for (var10 = 0; var10 < 8; ++var10) {
 							var33 = !var6[(var8 * 16 + var32) * 8 + var10]
-									&& (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15
-											&& var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7
-											&& var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
+									        && (var8 < 15 && var6[((var8 + 1) * 16 + var32) * 8 + var10] || var8 > 0 && var6[((var8 - 1) * 16 + var32) * 8 + var10] || var32 < 15
+											                                                                                                                                   && var6[(var8 * 16 + var32 + 1) * 8 + var10] || var32 > 0 && var6[(var8 * 16 + (var32 - 1)) * 8 + var10] || var10 < 7
+													                                                                                                                                                                                                                                               && var6[(var8 * 16 + var32) * 8 + var10 + 1] || var10 > 0 && var6[(var8 * 16 + var32) * 8 + (var10 - 1)]);
 
 							if (var33 && (var10 < 4 || par2Random.nextInt(2) != 0) && par1World.getBlock(par3 + var8, par4 + var10, par5 + var32).getMaterial().isSolid()) {
 								par1World.setBlock(par3 + var8, par4 + var10, par5 + var32, Blocks.sandstone);

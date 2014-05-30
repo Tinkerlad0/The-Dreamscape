@@ -1,6 +1,15 @@
-package com.tinkerlad.dimension.world.nightmare;
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
 
-import java.util.Random;
+package com.tinkerlad.dimension.world.nightmare;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -9,13 +18,16 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.MapGenBase;
 
+import java.util.Random;
+
 public class MapGenCavesNightmare extends MapGenBase {
+
 	protected void func_151542_a(long p_151542_1_, int p_151542_3_, int p_151542_4_, Block[] p_151542_5_, double p_151542_6_, double p_151542_8_, double p_151542_10_) {
 		this.func_151541_a(p_151542_1_, p_151542_3_, p_151542_4_, p_151542_5_, p_151542_6_, p_151542_8_, p_151542_10_, 1.0F + this.rand.nextFloat() * 6.0F, 0.0F, 0.0F, -1, -1, 0.5D);
 	}
 
 	protected void func_151541_a(long p_151541_1_, int p_151541_3_, int p_151541_4_, Block[] p_151541_5_, double p_151541_6_, double p_151541_8_, double p_151541_10_, float p_151541_12_,
-			float p_151541_13_, float p_151541_14_, int p_151541_15_, int p_151541_16_, double p_151541_17_) {
+	                             float p_151541_13_, float p_151541_14_, int p_151541_15_, int p_151541_16_, double p_151541_17_) {
 		double d4 = (double) (p_151541_3_ * 16 + 8);
 		double d5 = (double) (p_151541_4_ * 16 + 8);
 		float f3 = 0.0F;
@@ -60,9 +72,9 @@ public class MapGenCavesNightmare extends MapGenBase {
 
 			if (!flag2 && p_151541_15_ == k1 && p_151541_12_ > 1.0F && p_151541_16_ > 0) {
 				this.func_151541_a(random.nextLong(), p_151541_3_, p_151541_4_, p_151541_5_, p_151541_6_, p_151541_8_, p_151541_10_, random.nextFloat() * 0.5F + 0.5F, p_151541_13_
-						- ((float) Math.PI / 2F), p_151541_14_ / 3.0F, p_151541_15_, p_151541_16_, 1.0D);
+						                                                                                                                                                       - ((float) Math.PI / 2F), p_151541_14_ / 3.0F, p_151541_15_, p_151541_16_, 1.0D);
 				this.func_151541_a(random.nextLong(), p_151541_3_, p_151541_4_, p_151541_5_, p_151541_6_, p_151541_8_, p_151541_10_, random.nextFloat() * 0.5F + 0.5F, p_151541_13_
-						+ ((float) Math.PI / 2F), p_151541_14_ / 3.0F, p_151541_15_, p_151541_16_, 1.0D);
+						                                                                                                                                                       + ((float) Math.PI / 2F), p_151541_14_ / 3.0F, p_151541_15_, p_151541_16_, 1.0D);
 				return;
 			}
 
@@ -203,12 +215,9 @@ public class MapGenCavesNightmare extends MapGenBase {
 
 	// Exception biomes to make sure we generate like vanilla
 	private boolean isExceptionBiome(BiomeGenBase biome) {
-		if (biome == BiomeGenBase.mushroomIsland)
-			return true;
-		if (biome == BiomeGenBase.beach)
-			return true;
-		if (biome == BiomeGenBase.desert)
-			return true;
+		if (biome == BiomeGenBase.mushroomIsland) { return true; }
+		if (biome == BiomeGenBase.beach) { return true; }
+		if (biome == BiomeGenBase.desert) { return true; }
 		return false;
 	}
 
@@ -226,24 +235,16 @@ public class MapGenCavesNightmare extends MapGenBase {
 	 * and top block Sets the block to lava if y is less then 10, and air other
 	 * wise. If setting to air, it also checks to see if we've broken the
 	 * surface and if so tries to make the floor the biome's top block
-	 * 
-	 * @param data
-	 *            Block data array
-	 * @param index
-	 *            Pre-calculated index into block data
-	 * @param x
-	 *            local X position
-	 * @param y
-	 *            local Y position
-	 * @param z
-	 *            local Z position
-	 * @param chunkX
-	 *            Chunk X position
-	 * @param chunkZ
-	 *            Chunk Y position
-	 * @param foundTop
-	 *            True if we've encountered the biome's top block. Ideally if
-	 *            we've broken the surface.
+	 *
+	 * @param data     Block data array
+	 * @param index    Pre-calculated index into block data
+	 * @param x        local X position
+	 * @param y        local Y position
+	 * @param z        local Z position
+	 * @param chunkX   Chunk X position
+	 * @param chunkZ   Chunk Y position
+	 * @param foundTop True if we've encountered the biome's top block. Ideally if
+	 *                 we've broken the surface.
 	 */
 	protected void digBlock(Block[] data, int index, int x, int y, int z, int chunkX, int chunkZ, boolean foundTop) {
 		BiomeGenBase biome = worldObj.getBiomeGenForCoords(x + chunkX * 16, z + chunkZ * 16);

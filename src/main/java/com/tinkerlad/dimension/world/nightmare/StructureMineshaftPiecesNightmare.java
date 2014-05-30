@@ -1,11 +1,15 @@
+/******************************************************************************
+ * Copyright (c) 2014 Tinkerlad                                               *
+ * All rights reserved. This program and the accompanying materials           *
+ * are made available under the terms of the GNU Public License v2.0          *
+ * which accompanies this distribution, and is available at                   *
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html                      *
+ *                                                                            *
+ * Contributors:                                                              *
+ * 	Tinkerlad - initial concept and implementation                            *
+ ******************************************************************************/
+
 package com.tinkerlad.dimension.world.nightmare;
-
-import static net.minecraftforge.common.ChestGenHooks.MINESHAFT_CORRIDOR;
-
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -23,17 +27,25 @@ import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraftforge.common.ChestGenHooks;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
+import static net.minecraftforge.common.ChestGenHooks.MINESHAFT_CORRIDOR;
+
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class StructureMineshaftPiecesNightmare {
+
 	/**
 	 * List of contents that can generate in Mineshafts.
 	 */
-	public static final WeightedRandomChestContent[]	mineshaftChestContents	= new WeightedRandomChestContent[] { new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10),
-			new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.redstone, 0, 4, 9, 5), new WeightedRandomChestContent(Items.dye, 4, 4, 9, 5),
-			new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(Items.coal, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15),
-			new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1),
-			new WeightedRandomChestContent(Items.melon_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.pumpkin_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3),
-			new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1)	};
+	public static final WeightedRandomChestContent[] mineshaftChestContents = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10),
+			                                                                                                          new WeightedRandomChestContent(Items.gold_ingot, 0, 1, 3, 5), new WeightedRandomChestContent(Items.redstone, 0, 4, 9, 5), new WeightedRandomChestContent(Items.dye, 4, 4, 9, 5),
+			                                                                                                          new WeightedRandomChestContent(Items.diamond, 0, 1, 2, 3), new WeightedRandomChestContent(Items.coal, 0, 3, 8, 10), new WeightedRandomChestContent(Items.bread, 0, 1, 3, 15),
+			                                                                                                          new WeightedRandomChestContent(Items.iron_pickaxe, 0, 1, 1, 1), new WeightedRandomChestContent(Item.getItemFromBlock(Blocks.rail), 0, 4, 8, 1),
+			                                                                                                          new WeightedRandomChestContent(Items.melon_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.pumpkin_seeds, 0, 2, 4, 10), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3),
+			                                                                                                          new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1)};
 
 	public static void registerStructurePieces() {
 		MapGenStructureIO.func_143031_a(StructureMineshaftPiecesNightmare.Corridor.class, "MSCorridorSav");
@@ -87,20 +99,11 @@ public class StructureMineshaftPiecesNightmare {
 	}
 
 	public static class Cross extends StructureComponent {
-		private int		corridorDirection;
-		private boolean	isMultipleFloors;
+
+		private int corridorDirection;
+		private boolean isMultipleFloors;
 
 		public Cross() {
-		}
-
-		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
-			par1NBTTagCompound.setBoolean("tf", this.isMultipleFloors);
-			par1NBTTagCompound.setInteger("D", this.corridorDirection);
-		}
-
-		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
-			this.isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
-			this.corridorDirection = par1NBTTagCompound.getInteger("D");
 		}
 
 		public Cross(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4) {
@@ -142,6 +145,16 @@ public class StructureMineshaftPiecesNightmare {
 			return StructureComponent.findIntersecting(par0List, structureboundingbox) != null ? null : structureboundingbox;
 		}
 
+		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
+			this.isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
+			this.corridorDirection = par1NBTTagCompound.getInteger("D");
+		}
+
+		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
+			par1NBTTagCompound.setBoolean("tf", this.isMultipleFloors);
+			par1NBTTagCompound.setInteger("D", this.corridorDirection);
+		}
+
 		/**
 		 * Initiates construction of the Structure Component picked, at the
 		 * current Location of StructGen
@@ -152,56 +165,56 @@ public class StructureMineshaftPiecesNightmare {
 			switch (this.corridorDirection) {
 				case 0:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.maxZ + 1, 0, i);
+							                                                           this.boundingBox.maxZ + 1, 0, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 1, i);
+							                                                           this.boundingBox.minZ + 1, 1, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 3, i);
+							                                                           this.boundingBox.minZ + 1, 3, i);
 					break;
 				case 1:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ - 1, 2, i);
+							                                                           this.boundingBox.minZ - 1, 2, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.maxZ + 1, 0, i);
+							                                                           this.boundingBox.maxZ + 1, 0, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 1, i);
+							                                                           this.boundingBox.minZ + 1, 1, i);
 					break;
 				case 2:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ - 1, 2, i);
+							                                                           this.boundingBox.minZ - 1, 2, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 1, i);
+							                                                           this.boundingBox.minZ + 1, 1, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 3, i);
+							                                                           this.boundingBox.minZ + 1, 3, i);
 					break;
 				case 3:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ - 1, 2, i);
+							                                                           this.boundingBox.minZ - 1, 2, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY,
-							this.boundingBox.maxZ + 1, 0, i);
+							                                                           this.boundingBox.maxZ + 1, 0, i);
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY,
-							this.boundingBox.minZ + 1, 3, i);
+							                                                           this.boundingBox.minZ + 1, 3, i);
 			}
 
 			if (this.isMultipleFloors) {
 				if (par3Random.nextBoolean()) {
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY + 3 + 1,
-							this.boundingBox.minZ - 1, 2, i);
+							                                                           this.boundingBox.minZ - 1, 2, i);
 				}
 
 				if (par3Random.nextBoolean()) {
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + 3 + 1,
-							this.boundingBox.minZ + 1, 1, i);
+							                                                           this.boundingBox.minZ + 1, 1, i);
 				}
 
 				if (par3Random.nextBoolean()) {
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + 3 + 1,
-							this.boundingBox.minZ + 1, 3, i);
+							                                                           this.boundingBox.minZ + 1, 3, i);
 				}
 
 				if (par3Random.nextBoolean()) {
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + 1, this.boundingBox.minY + 3 + 1,
-							this.boundingBox.maxZ + 1, 0, i);
+							                                                           this.boundingBox.maxZ + 1, 0, i);
 				}
 			}
 		}
@@ -217,30 +230,30 @@ public class StructureMineshaftPiecesNightmare {
 			} else {
 				if (this.isMultipleFloors) {
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.minY, this.boundingBox.minZ, this.boundingBox.maxX - 1,
-							this.boundingBox.minY + 3 - 1, this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.minY + 3 - 1, this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ + 1, this.boundingBox.maxX,
-							this.boundingBox.minY + 3 - 1, this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.minY + 3 - 1, this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.maxY - 2, this.boundingBox.minZ, this.boundingBox.maxX - 1,
-							this.boundingBox.maxY, this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.maxY, this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.maxY - 2, this.boundingBox.minZ + 1, this.boundingBox.maxX, this.boundingBox.maxY,
-							this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.minY + 3, this.boundingBox.minZ + 1, this.boundingBox.maxX - 1,
-							this.boundingBox.minY + 3, this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.minY + 3, this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
 				} else {
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.minY, this.boundingBox.minZ, this.boundingBox.maxX - 1, this.boundingBox.maxY,
-							this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ + 1, this.boundingBox.maxX, this.boundingBox.maxY,
-							this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
+							                   this.boundingBox.maxZ - 1, Blocks.air, Blocks.air, false);
 				}
 
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.minY, this.boundingBox.minZ + 1, this.boundingBox.minX + 1, this.boundingBox.maxY,
-						this.boundingBox.minZ + 1, Blocks.planks, Blocks.air, false);
+						                   this.boundingBox.minZ + 1, Blocks.planks, Blocks.air, false);
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX + 1, this.boundingBox.minY, this.boundingBox.maxZ - 1, this.boundingBox.minX + 1, this.boundingBox.maxY,
-						this.boundingBox.maxZ - 1, Blocks.planks, Blocks.air, false);
+						                   this.boundingBox.maxZ - 1, Blocks.planks, Blocks.air, false);
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.maxX - 1, this.boundingBox.minY, this.boundingBox.minZ + 1, this.boundingBox.maxX - 1, this.boundingBox.maxY,
-						this.boundingBox.minZ + 1, Blocks.planks, Blocks.air, false);
+						                   this.boundingBox.minZ + 1, Blocks.planks, Blocks.air, false);
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.maxX - 1, this.boundingBox.minY, this.boundingBox.maxZ - 1, this.boundingBox.maxX - 1, this.boundingBox.maxY,
-						this.boundingBox.maxZ - 1, Blocks.planks, Blocks.air, false);
+						                   this.boundingBox.maxZ - 1, Blocks.planks, Blocks.air, false);
 
 				for (int i = this.boundingBox.minX; i <= this.boundingBox.maxX; ++i) {
 					for (int j = this.boundingBox.minZ; j <= this.boundingBox.maxZ; ++j) {
@@ -256,10 +269,11 @@ public class StructureMineshaftPiecesNightmare {
 	}
 
 	public static class Room extends StructureComponent {
+
 		/**
 		 * List of other Mineshaft components linked to this room.
 		 */
-		private List	roomsLinkedToTheRoom	= new LinkedList();
+		private List roomsLinkedToTheRoom = new LinkedList();
 
 		public Room() {
 		}
@@ -293,12 +307,12 @@ public class StructureMineshaftPiecesNightmare {
 				}
 
 				structurecomponent1 = StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + j, this.boundingBox.minY
-						+ par3Random.nextInt(k) + 1, this.boundingBox.minZ - 1, 2, i);
+						                                                                                                                                                           + par3Random.nextInt(k) + 1, this.boundingBox.minZ - 1, 2, i);
 
 				if (structurecomponent1 != null) {
 					structureboundingbox = structurecomponent1.getBoundingBox();
 					this.roomsLinkedToTheRoom.add(new StructureBoundingBox(structureboundingbox.minX, structureboundingbox.minY, this.boundingBox.minZ, structureboundingbox.maxX,
-							structureboundingbox.maxY, this.boundingBox.minZ + 1));
+							                                                      structureboundingbox.maxY, this.boundingBox.minZ + 1));
 				}
 			}
 
@@ -310,12 +324,12 @@ public class StructureMineshaftPiecesNightmare {
 				}
 
 				structurecomponent1 = StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX + j, this.boundingBox.minY
-						+ par3Random.nextInt(k) + 1, this.boundingBox.maxZ + 1, 0, i);
+						                                                                                                                                                           + par3Random.nextInt(k) + 1, this.boundingBox.maxZ + 1, 0, i);
 
 				if (structurecomponent1 != null) {
 					structureboundingbox = structurecomponent1.getBoundingBox();
 					this.roomsLinkedToTheRoom.add(new StructureBoundingBox(structureboundingbox.minX, structureboundingbox.minY, this.boundingBox.maxZ - 1, structureboundingbox.maxX,
-							structureboundingbox.maxY, this.boundingBox.maxZ));
+							                                                      structureboundingbox.maxY, this.boundingBox.maxZ));
 				}
 			}
 
@@ -327,12 +341,12 @@ public class StructureMineshaftPiecesNightmare {
 				}
 
 				structurecomponent1 = StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY
-						+ par3Random.nextInt(k) + 1, this.boundingBox.minZ + j, 1, i);
+						                                                                                                                                                           + par3Random.nextInt(k) + 1, this.boundingBox.minZ + j, 1, i);
 
 				if (structurecomponent1 != null) {
 					structureboundingbox = structurecomponent1.getBoundingBox();
 					this.roomsLinkedToTheRoom.add(new StructureBoundingBox(this.boundingBox.minX, structureboundingbox.minY, structureboundingbox.minZ, this.boundingBox.minX + 1,
-							structureboundingbox.maxY, structureboundingbox.maxZ));
+							                                                      structureboundingbox.maxY, structureboundingbox.maxZ));
 				}
 			}
 
@@ -344,12 +358,12 @@ public class StructureMineshaftPiecesNightmare {
 				}
 
 				structurecomponent1 = StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY
-						+ par3Random.nextInt(k) + 1, this.boundingBox.minZ + j, 3, i);
+						                                                                                                                                                           + par3Random.nextInt(k) + 1, this.boundingBox.minZ + j, 3, i);
 
 				if (structurecomponent1 != null) {
 					structureboundingbox = structurecomponent1.getBoundingBox();
 					this.roomsLinkedToTheRoom.add(new StructureBoundingBox(this.boundingBox.maxX - 1, structureboundingbox.minY, structureboundingbox.minZ, this.boundingBox.maxX,
-							structureboundingbox.maxY, structureboundingbox.maxZ));
+							                                                      structureboundingbox.maxY, structureboundingbox.maxZ));
 				}
 			}
 		}
@@ -364,19 +378,19 @@ public class StructureMineshaftPiecesNightmare {
 				return false;
 			} else {
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.minY,
-						this.boundingBox.maxZ, Blocks.dirt, Blocks.air, true);
+						                   this.boundingBox.maxZ, Blocks.dirt, Blocks.air, true);
 				this.fillWithBlocks(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.minY + 1, this.boundingBox.minZ, this.boundingBox.maxX,
-						Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
+						                   Math.min(this.boundingBox.minY + 3, this.boundingBox.maxY), this.boundingBox.maxZ, Blocks.air, Blocks.air, false);
 				Iterator iterator = this.roomsLinkedToTheRoom.iterator();
 
 				while (iterator.hasNext()) {
 					StructureBoundingBox structureboundingbox1 = (StructureBoundingBox) iterator.next();
 					this.fillWithBlocks(par1World, par3StructureBoundingBox, structureboundingbox1.minX, structureboundingbox1.maxY - 2, structureboundingbox1.minZ, structureboundingbox1.maxX,
-							structureboundingbox1.maxY, structureboundingbox1.maxZ, Blocks.air, Blocks.air, false);
+							                   structureboundingbox1.maxY, structureboundingbox1.maxZ, Blocks.air, Blocks.air, false);
 				}
 
 				this.func_151547_a(par1World, par3StructureBoundingBox, this.boundingBox.minX, this.boundingBox.minY + 4, this.boundingBox.minZ, this.boundingBox.maxX, this.boundingBox.maxY,
-						this.boundingBox.maxZ, Blocks.air, false);
+						                  this.boundingBox.maxZ, Blocks.air, false);
 				return true;
 			}
 		}
@@ -403,30 +417,17 @@ public class StructureMineshaftPiecesNightmare {
 	}
 
 	public static class Corridor extends StructureComponent {
-		private boolean	hasRails;
-		private boolean	hasSpiders;
-		private boolean	spawnerPlaced;
+
+		private boolean hasRails;
+		private boolean hasSpiders;
+		private boolean spawnerPlaced;
 		/**
 		 * A count of the different sections of this mine. The space between
 		 * ceiling supports.
 		 */
-		private int		sectionCount;
+		private int sectionCount;
 
 		public Corridor() {
-		}
-
-		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
-			par1NBTTagCompound.setBoolean("hr", this.hasRails);
-			par1NBTTagCompound.setBoolean("sc", this.hasSpiders);
-			par1NBTTagCompound.setBoolean("hps", this.spawnerPlaced);
-			par1NBTTagCompound.setInteger("Num", this.sectionCount);
-		}
-
-		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
-			this.hasRails = par1NBTTagCompound.getBoolean("hr");
-			this.hasSpiders = par1NBTTagCompound.getBoolean("sc");
-			this.spawnerPlaced = par1NBTTagCompound.getBoolean("hps");
-			this.sectionCount = par1NBTTagCompound.getInteger("Num");
 		}
 
 		public Corridor(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4) {
@@ -441,6 +442,13 @@ public class StructureMineshaftPiecesNightmare {
 			} else {
 				this.sectionCount = par3StructureBoundingBox.getZSize() / 5;
 			}
+		}
+
+		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
+			par1NBTTagCompound.setBoolean("hr", this.hasRails);
+			par1NBTTagCompound.setBoolean("sc", this.hasSpiders);
+			par1NBTTagCompound.setBoolean("hps", this.spawnerPlaced);
+			par1NBTTagCompound.setInteger("Num", this.sectionCount);
 		}
 
 		public static StructureBoundingBox findValidPlacement(List par0List, Random par1Random, int par2, int par3, int par4, int par5) {
@@ -476,6 +484,13 @@ public class StructureMineshaftPiecesNightmare {
 			return i1 > 0 ? structureboundingbox : null;
 		}
 
+		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
+			this.hasRails = par1NBTTagCompound.getBoolean("hr");
+			this.hasSpiders = par1NBTTagCompound.getBoolean("sc");
+			this.spawnerPlaced = par1NBTTagCompound.getBoolean("hps");
+			this.sectionCount = par1NBTTagCompound.getInteger("Num");
+		}
+
 		/**
 		 * Initiates construction of the Structure Component picked, at the
 		 * current Location of StructGen
@@ -488,52 +503,52 @@ public class StructureMineshaftPiecesNightmare {
 				case 0:
 					if (j <= 1) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, this.coordBaseMode, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, this.coordBaseMode, i);
 					} else if (j == 2) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ - 3, 1, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ - 3, 1, i);
 					} else {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ - 3, 3, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ - 3, 3, i);
 					}
 
 					break;
 				case 1:
 					if (j <= 1) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, i);
 					} else if (j == 2) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, 2, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, 2, i);
 					} else {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, 0, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, 0, i);
 					}
 
 					break;
 				case 2:
 					if (j <= 1) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, this.coordBaseMode, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, this.coordBaseMode, i);
 					} else if (j == 2) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, 1, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, 1, i);
 					} else {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, 3, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, 3, i);
 					}
 
 					break;
 				case 3:
 					if (j <= 1) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, i);
 					} else if (j == 2) {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX - 3,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, 2, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, 2, i);
 					} else {
 						StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX - 3,
-								this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, 0, i);
+								                                                           this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, 0, i);
 					}
 			}
 
@@ -570,7 +585,7 @@ public class StructureMineshaftPiecesNightmare {
 		 * Blacksmith Chests, Mineshaft Chests.
 		 */
 		protected boolean generateStructureChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6,
-				WeightedRandomChestContent[] par7ArrayOfWeightedRandomChestContent, int par8) {
+		                                                 WeightedRandomChestContent[] par7ArrayOfWeightedRandomChestContent, int par8) {
 			int i1 = this.getXWithOffset(par4, par6);
 			int j1 = this.getYWithOffset(par5);
 			int k1 = this.getZWithOffset(par4, par6);
@@ -685,6 +700,7 @@ public class StructureMineshaftPiecesNightmare {
 	}
 
 	public static class Stairs extends StructureComponent {
+
 		public Stairs() {
 		}
 
@@ -692,12 +708,6 @@ public class StructureMineshaftPiecesNightmare {
 			super(par1);
 			this.coordBaseMode = par4;
 			this.boundingBox = par3StructureBoundingBox;
-		}
-
-		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
-		}
-
-		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
 		}
 
 		/**
@@ -727,6 +737,12 @@ public class StructureMineshaftPiecesNightmare {
 			return StructureComponent.findIntersecting(par0List, structureboundingbox) != null ? null : structureboundingbox;
 		}
 
+		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
+		}
+
+		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
+		}
+
 		/**
 		 * Initiates construction of the Structure Component picked, at the
 		 * current Location of StructGen
@@ -737,19 +753,19 @@ public class StructureMineshaftPiecesNightmare {
 			switch (this.coordBaseMode) {
 				case 0:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.maxZ + 1,
-							0, i);
+							                                                           0, i);
 					break;
 				case 1:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY, this.boundingBox.minZ,
-							1, i);
+							                                                           1, i);
 					break;
 				case 2:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX, this.boundingBox.minY, this.boundingBox.minZ - 1,
-							2, i);
+							                                                           2, i);
 					break;
 				case 3:
 					StructureMineshaftPiecesNightmare.getNextMineShaftComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY, this.boundingBox.minZ,
-							3, i);
+							                                                           3, i);
 			}
 		}
 

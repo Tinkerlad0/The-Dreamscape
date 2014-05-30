@@ -9,39 +9,33 @@
  * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
 
-package com.tinkerlad.dimension.item;
+package com.tinkerlad.dimension.utils;
 
+import com.tinkerlad.dimension.block.DimBlocks;
+import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.logging.LogHelper;
-import com.tinkerlad.dimension.reference.ItemInfo;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.logging.log4j.Level;
 
-public class DimItem {
+public class Recipes {
 
-	public static Item debug;
-	public static Item leg;
-	public static Item rubyGem;
+	public static void addRecipes() {
 
-	public static void init() {
+		LogHelper.log(Level.INFO, "Adding Recipes");
 
-		LogHelper.log(Level.INFO, "Preparing items");
+		Object[] legRecipe = new Object[]{" X ", " / ", " Z ", 'X', "plankWood", '/', "stickWood", 'Z', "logWood"};
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(DimItem.leg), legRecipe));
 
-		debug = new ItemDebug().setUnlocalizedName(ItemInfo.DEBUG_UNLOCALIZED_NAME);
-		leg = new ItemBedLeg().setUnlocalizedName(ItemInfo.LEG_UNLOCALIZED_NAME);
-		rubyGem = new ItemRuby().setUnlocalizedName(ItemInfo.RUBY_UNLOCALIZED_NAME);
+		Object[] plankRecipe = {"X", 'X', DimBlocks.BlockDiamondWood};
+		GameRegistry.addRecipe(new ItemStack(Blocks.planks, 16), plankRecipe);
 
-		GameRegistry.registerItem(debug, ItemInfo.DEBUG_UNLOCALIZED_NAME);
-		GameRegistry.registerItem(leg, ItemInfo.LEG_UNLOCALIZED_NAME);
-		GameRegistry.registerItem(rubyGem, ItemInfo.RUBY_UNLOCALIZED_NAME);
+		Object[] hardenedWoodRecipe = {"XXX", "XYX", "XXX", 'X', DimBlocks.BlockDiamondWood, 'Y', Blocks.planks};
+		GameRegistry.addRecipe(new ItemStack(Items.iron_ingot, 2), hardenedWoodRecipe);
 
-		OreDictionary.registerOre("legBed", leg);
-		OreDictionary.registerOre("gemRuby", rubyGem);
-
-
-		LogHelper.log(Level.INFO, "Items Loaded");
+		LogHelper.log(Level.INFO, "Added Recipes");
 	}
 }

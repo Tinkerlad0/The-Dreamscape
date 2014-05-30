@@ -11,23 +11,43 @@
 
 package com.tinkerlad.dimension.block;
 
+import com.tinkerlad.dimension.creativeTab.TabItems;
 import com.tinkerlad.dimension.reference.BlockInfo;
+import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.IIcon;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import sun.org.mozilla.javascript.internal.ast.Block;
 
-public class BlockPlatinumOre extends BlockGeneric {
+import java.util.List;
+
+/**
+ * Created by Michael on 5/27/2014.
+ */
+public class BlockGlobalStorage extends BlockGeneric {
+
+	public BlockGlobalStorage() {
+		super(Material.rock);
+		this.setBlockUnbreakable();
+		this.setBlockName(BlockInfo.GLOBAL_ULOCALIZED_NAME);
+		this.setBlockTextureName(BlockInfo.GLOBAL_TEXTURE);
+		this.setCreativeTab(TabItems.tabPossession);
+	}
 
 	@SideOnly(Side.CLIENT)
-	protected IIcon blockIcon;
 
-	public BlockPlatinumOre() {
-		super(Material.rock);
-		setHardness(4F);
-		setResistance(2F);
-		setStepSound(soundTypeStone);
-		setBlockName(BlockInfo.PLATINUM_ULOCALIZED_NAME);
-		setBlockTextureName(BlockInfo.TEXTURE_LOCATION + BlockInfo.PLATINUM_TEXTURE);
+	public void addInformation(ItemStack stack, EntityPlayer player, List info, boolean useExtraInformation) {
+
+		info.add("DO NOT PLACE THIS ITEM.... IT WILL BREAK THINGS INTERNALLY");
 	}
+
+	public TileEntity createTileEntity(World world, int metadata)
+	{
+		return new TileGlobalStorage();
+	}
+
 }
