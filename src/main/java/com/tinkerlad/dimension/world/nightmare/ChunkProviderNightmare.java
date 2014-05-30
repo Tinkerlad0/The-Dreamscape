@@ -39,8 +39,6 @@ import net.minecraftforge.event.terraingen.TerrainGen;
 import java.util.List;
 import java.util.Random;
 
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
 import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
 
 public class ChunkProviderNightmare implements IChunkProvider {

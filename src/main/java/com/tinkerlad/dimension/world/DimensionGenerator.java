@@ -42,8 +42,8 @@ public class DimensionGenerator implements IWorldGenerator {
 	}
 
 	private void generateDream(World world, Random random, int x, int z) {
-		if(random.nextInt(15)==0){
-			DiamondTree.tryGenerate(world,random,x,world.getTopSolidOrLiquidBlock(x,z),z);
+		if (random.nextInt(15) == 0) {
+			DiamondTree.tryGenerate(world, random, x, world.getTopSolidOrLiquidBlock(x, z), z);
 		}
 	}
 
@@ -59,5 +59,4 @@ public class DimensionGenerator implements IWorldGenerator {
 	public void generateNether(World world, Random random, int blockX, int blockZ) {
 
 	}
-
 }

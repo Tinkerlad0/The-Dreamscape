@@ -13,9 +13,9 @@ import java.util.Random;
 
 public class SleptInBedPacket extends AbstractPacket {
 
-	int	xLoc;
-	int	yLoc;
-	int	zLoc;
+	int xLoc;
+	int yLoc;
+	int zLoc;
 
 	public SleptInBedPacket() {
 
@@ -59,7 +59,6 @@ public class SleptInBedPacket extends AbstractPacket {
 				player.inventory.copyInventory(GlobalStorage.PLAYER_INVENTORY_DREAMING.get(player));
 			}
 		}
-
 	}
 
 	private void dream(EntityPlayer player) {
@@ -68,5 +67,4 @@ public class SleptInBedPacket extends AbstractPacket {
 		int dimID = Dimension.dreamID + rand.nextInt(1);
 		Utils.teleport(player, dimID);
 	}
-
 }

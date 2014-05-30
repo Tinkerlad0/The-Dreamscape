@@ -145,14 +145,14 @@ public class StructureMineshaftPiecesNightmare {
 			return StructureComponent.findIntersecting(par0List, structureboundingbox) != null ? null : structureboundingbox;
 		}
 
-		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
-			this.isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
-			this.corridorDirection = par1NBTTagCompound.getInteger("D");
-		}
-
 		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
 			par1NBTTagCompound.setBoolean("tf", this.isMultipleFloors);
 			par1NBTTagCompound.setInteger("D", this.corridorDirection);
+		}
+
+		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {
+			this.isMultipleFloors = par1NBTTagCompound.getBoolean("tf");
+			this.corridorDirection = par1NBTTagCompound.getInteger("D");
 		}
 
 		/**
@@ -444,13 +444,6 @@ public class StructureMineshaftPiecesNightmare {
 			}
 		}
 
-		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
-			par1NBTTagCompound.setBoolean("hr", this.hasRails);
-			par1NBTTagCompound.setBoolean("sc", this.hasSpiders);
-			par1NBTTagCompound.setBoolean("hps", this.spawnerPlaced);
-			par1NBTTagCompound.setInteger("Num", this.sectionCount);
-		}
-
 		public static StructureBoundingBox findValidPlacement(List par0List, Random par1Random, int par2, int par3, int par4, int par5) {
 			StructureBoundingBox structureboundingbox = new StructureBoundingBox(par2, par3, par4, par2, par3 + 2, par4);
 			int i1;
@@ -482,6 +475,13 @@ public class StructureMineshaftPiecesNightmare {
 			}
 
 			return i1 > 0 ? structureboundingbox : null;
+		}
+
+		protected void func_143012_a(NBTTagCompound par1NBTTagCompound) {
+			par1NBTTagCompound.setBoolean("hr", this.hasRails);
+			par1NBTTagCompound.setBoolean("sc", this.hasSpiders);
+			par1NBTTagCompound.setBoolean("hps", this.spawnerPlaced);
+			par1NBTTagCompound.setInteger("Num", this.sectionCount);
 		}
 
 		protected void func_143011_b(NBTTagCompound par1NBTTagCompound) {

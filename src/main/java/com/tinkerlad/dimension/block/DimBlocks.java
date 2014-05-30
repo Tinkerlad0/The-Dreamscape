@@ -75,7 +75,7 @@ public class DimBlocks {
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
 
 		BlockGlobalStorage = new BlockGlobalStorage();
-		GameRegistry.registerBlock(BlockGlobalStorage,BlockInfo.GLOBAL_ULOCALIZED_NAME);
+		GameRegistry.registerBlock(BlockGlobalStorage, BlockInfo.GLOBAL_ULOCALIZED_NAME);
 
 		DimFluids.init();
 

@@ -13,7 +13,6 @@ package com.tinkerlad.dimension.item;
 
 import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.reference.ItemInfo;
-import com.tinkerlad.dimension.world.dream.diamondTree.DiamondTree;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -38,8 +37,8 @@ public class ItemDebug extends ItemPossession {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer par5Entity) {
 
-		if(Minecraft.getMinecraft().theWorld.getTileEntity(0,0,0) == null) {
-			Minecraft.getMinecraft().theWorld.setBlock(0,0,0, DimBlocks.BlockGlobalStorage);
+		if (Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0) == null) {
+			Minecraft.getMinecraft().theWorld.setBlock(0, 0, 0, DimBlocks.BlockGlobalStorage);
 		}
 
 		return stack;

@@ -28,8 +28,7 @@ public class DimFluids {
 
 	private static Fluid dreamWater;
 
-
-	public static void init(){
+	public static void init() {
 
 		//DreamWater
 		dreamWater = new Fluid("dream_water").setDensity(800).setViscosity(1500);
@@ -44,10 +43,5 @@ public class DimFluids {
 		} else {
 			BlockFluidDreamWater = FluidDreamWater.getBlock();
 		}
-
-
-
-
 	}
-
 }

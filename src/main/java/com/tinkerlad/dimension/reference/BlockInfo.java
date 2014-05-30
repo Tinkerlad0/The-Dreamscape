@@ -16,7 +16,6 @@ public class BlockInfo {
 	public static final String TEXTURE_LOCATION = ModInfo.ID.toLowerCase() + ":";
 	public static final String DEFAULT = "default";
 
-
 	// BlockLightStone
 	public static final String LIGHTSTONE_ULOCALIZED_NAME = "lightStone";
 	public static final String LIGHTSTONE_TEXTURE = "lightstone";
@@ -55,7 +54,7 @@ public class BlockInfo {
 
 	//BlockTopSoil
 	public static final String TOPSOIL_ULOCALIZED_NAME = "topSoil";
-	public static final String TOPSOIL_TEXTURE[] = {"soil_grass", "soil","soil_side"};
+	public static final String TOPSOIL_TEXTURE[] = {"soil_grass", "soil", "soil_side"};
 
 	//BlockFluidDreamWater
 	public static final String DREAMWATER_ULOCALIZED_NAME = "dreamWater";

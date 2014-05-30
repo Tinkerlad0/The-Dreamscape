@@ -15,9 +15,7 @@ import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.ItemInfo;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import org.apache.logging.log4j.Level;
 
 public class DimItem {

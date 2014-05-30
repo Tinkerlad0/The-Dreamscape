@@ -72,13 +72,13 @@ public class FluidGeneric extends BlockFluidClassic {
 	}
 
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if (true){//!world.isRemote) {
+		if (true) {//!world.isRemote) {
 			if (fluidName == "dream_water") {
 				if (entity instanceof EntityPlayer) {
 					EntityPlayer player = ((EntityPlayer) entity);
 					player.addPotionEffect(new PotionEffect(1, 600, 3));
-					player.addPotionEffect(new PotionEffect(6, 20,1));
-					player.addPotionEffect(new PotionEffect(8,600, 4));
+					player.addPotionEffect(new PotionEffect(6, 20, 1));
+					player.addPotionEffect(new PotionEffect(8, 600, 4));
 				}
 			} else {
 			}
