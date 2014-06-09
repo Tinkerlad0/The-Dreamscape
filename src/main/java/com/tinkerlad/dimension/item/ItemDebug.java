@@ -11,14 +11,16 @@
 
 package com.tinkerlad.dimension.item;
 
-import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.reference.ItemInfo;
+import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -38,7 +40,13 @@ public class ItemDebug extends ItemPossession {
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer par5Entity) {
 
 		if (Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0) == null) {
-			Minecraft.getMinecraft().theWorld.setBlock(0, 0, 0, DimBlocks.BlockGlobalStorage);
+			System.out.println("Does not exist");
+		} else {
+			TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0);
+			if (tile instanceof TileGlobalStorage) {
+				TileGlobalStorage storage = (TileGlobalStorage) tile;
+				storage.writeToNBT(new NBTTagCompound());
+			}
 		}
 
 		return stack;

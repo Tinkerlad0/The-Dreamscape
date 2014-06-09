@@ -11,31 +11,30 @@
 
 package com.tinkerlad.dimension.utils;
 
+import com.tinkerlad.dimension.block.DimBlocks;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.world.WorldEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraft.client.Minecraft;
 
-public class ForgeEventReciever {
+public class LoadTimer {
 
-	@SubscribeEvent
-	public void onPlayerSleep(PlayerSleepInBedEvent event) {
+	public int ticksRequired;
+	public boolean enabled = false;
+	private int ticked = 0;
 
-		if (GlobalStorage.DREAM) {
-			if (!event.isCanceled()) {
-				if (event.entityPlayer.worldObj.isRemote) {
-					System.out.println(event.entityPlayer.worldObj.isRemote);
-					SleepTimer timer = new SleepTimer(60, event.entityPlayer, event);
-					FMLCommonHandler.instance().bus().register(timer);
-					timer.enable();
-				}
-			}
-		}
+	public LoadTimer(int ticks) {
+		this.ticksRequired = ticks;
 	}
 
 	@SubscribeEvent
-	public void worldLoad(WorldEvent.Load event) {
-		LoadTimer timer = new LoadTimer(2000);
-		FMLCommonHandler.instance().bus().register(timer);
+	public void onServerTick(ServerTickEvent event) {
+		this.ticked++;
+		if (this.ticked == this.ticksRequired) {
+			if (Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0) == null) {
+				Minecraft.getMinecraft().theWorld.setBlock(0, 0, 0, DimBlocks.BlockGlobalStorage);
+			}
+			FMLCommonHandler.instance().bus().unregister(this);
+		}
 	}
 }

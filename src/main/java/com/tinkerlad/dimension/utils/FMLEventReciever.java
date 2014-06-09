@@ -32,7 +32,7 @@ public class FMLEventReciever {
 		long time = worldserver.getWorldTime();
 		if (cooldown == 0) {
 			if ((time % 24000L) > 0 && time % 24000 < 1000) {
-				//wakeUpDreamers(Dimension.dreamID);
+				wakeUpDreamers(Dimension.dreamID);
 				wakeUpDreamers(Dimension.nightmareID);
 				System.out.println("WAKE UP GEOFF");
 				cooldown = 2200;

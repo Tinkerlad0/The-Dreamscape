@@ -52,14 +52,14 @@ public class TileGlobalStorage extends TileEntity {
 	public InventoryPlayer getInventory(int map, EntityPlayer player) {
 		switch (map) {
 			case 0://Get Standard Inventory
-				if (PLAYER_INVENTORY_STANDARD.containsKey(player)) {
-					return PLAYER_INVENTORY_STANDARD.get(player);
+				if (PLAYER_INVENTORY_STANDARD.containsKey(player.getDisplayName())) {
+					return PLAYER_INVENTORY_STANDARD.get(player.getDisplayName());
 				} else {
 					return null;
 				}
 			case 1:
-				if (PLAYER_INVENTORY_DREAMING.containsKey(player)) {
-					return PLAYER_INVENTORY_DREAMING.get(player);
+				if (PLAYER_INVENTORY_DREAMING.containsKey(player.getDisplayName())) {
+					return PLAYER_INVENTORY_DREAMING.get(player.getDisplayName());
 				} else {
 					return null;
 				}
