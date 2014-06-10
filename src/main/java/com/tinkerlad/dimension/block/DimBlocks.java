@@ -11,6 +11,10 @@
 
 package com.tinkerlad.dimension.block;
 
+import com.tinkerlad.dimension.block.bed.BlockBed1;
+import com.tinkerlad.dimension.block.bed.BlockBed2;
+import com.tinkerlad.dimension.block.bed.BlockBed3;
+import com.tinkerlad.dimension.block.bed.BlockBedMaster;
 import com.tinkerlad.dimension.block.dream.BlockDiamondLeaves;
 import com.tinkerlad.dimension.block.dream.BlockDiamondWood;
 import com.tinkerlad.dimension.block.dream.BlockTopSoil;
@@ -39,6 +43,12 @@ public class DimBlocks {
 	public static Block BlockHardenedOre;
 	public static Block BlockFreakySand;
 	public static Block BlockBedrockBreakable;
+
+	//BedBlocks
+	public static Block BlockBedMaster;
+	public static Block BlockTier1;
+	public static Block BlockTier2;
+	public static Block BlockTier3;
 
 	public static Block BlockDebug;
 	public static Block BlockGlobalStorage;
@@ -71,11 +81,23 @@ public class DimBlocks {
 		BlockTopSoil = new BlockTopSoil();
 		GameRegistry.registerBlock(BlockTopSoil, BlockInfo.TOPSOIL_ULOCALIZED_NAME);
 
+		BlockBedMaster = new BlockBedMaster();
+		GameRegistry.registerBlock(BlockBedMaster, BlockInfo.MASTER_ULOCALIZED_NAME);
+
 		BlockDebug = new BlockDebug();
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
 
 		BlockGlobalStorage = new BlockGlobalStorage();
 		GameRegistry.registerBlock(BlockGlobalStorage, BlockInfo.GLOBAL_ULOCALIZED_NAME);
+
+		BlockTier1 = new BlockBed1();
+		BlockTier2 = new BlockBed2();
+		BlockTier3 = new BlockBed3();
+
+		GameRegistry.registerBlock(BlockTier1, BlockInfo.BASE_ULOCALIZED_NAME[0]);
+		GameRegistry.registerBlock(BlockTier2, BlockInfo.BASE_ULOCALIZED_NAME[1]);
+		GameRegistry.registerBlock(BlockTier3, BlockInfo.BASE_ULOCALIZED_NAME[2]);
+
 
 		DimFluids.init();
 

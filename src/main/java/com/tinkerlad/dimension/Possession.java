@@ -24,6 +24,7 @@ import com.tinkerlad.dimension.proxies.ClientProxy;
 import com.tinkerlad.dimension.proxies.CommonProxy;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.reference.ModInfo;
+import com.tinkerlad.dimension.tileEntities.TileBedMaster;
 import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
 import com.tinkerlad.dimension.utils.*;
 import com.tinkerlad.dimension.world.Dimension;
@@ -70,6 +71,7 @@ public class Possession {
 
 		ClientProxy.registerRenderThings();
 		GameRegistry.registerTileEntity(TileGlobalStorage.class, BlockInfo.GLOBAL_ULOCALIZED_NAME);
+		GameRegistry.registerTileEntity(TileBedMaster.class, BlockInfo.MASTER_ULOCALIZED_NAME);
 
 		Recipes.addRecipes();
 		MinecraftForge.EVENT_BUS.register(new ForgeEventReciever());

@@ -63,4 +63,12 @@ public class BlockInfo {
 	//BlockGlobalStorage
 	public static final String GLOBAL_ULOCALIZED_NAME = "globalStorage";
 	public static final String GLOBAL_TEXTURE = "bedrock";
+
+	//BlockBedMaster
+	public static final String MASTER_ULOCALIZED_NAME = "masterBed";
+	public static final String MASTER_TEXTURE[] = {"stone", "pensive"};
+
+	//BlockBed Bases
+	public static final String BASE_ULOCALIZED_NAME[] = {"bedTier1", "bedTier2", "bedTier3"};
+	public static final String BASE_TEXTURE[] = {"tier1", "tier2", "tier3"};
 }

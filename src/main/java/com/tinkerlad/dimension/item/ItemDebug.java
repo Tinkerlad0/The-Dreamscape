@@ -12,15 +12,12 @@
 package com.tinkerlad.dimension.item;
 
 import com.tinkerlad.dimension.reference.ItemInfo;
-import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -37,17 +34,7 @@ public class ItemDebug extends ItemPossession {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer par5Entity) {
-
-		if (Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0) == null) {
-			System.out.println("Does not exist");
-		} else {
-			TileEntity tile = Minecraft.getMinecraft().theWorld.getTileEntity(0, 0, 0);
-			if (tile instanceof TileGlobalStorage) {
-				TileGlobalStorage storage = (TileGlobalStorage) tile;
-				storage.writeToNBT(new NBTTagCompound());
-			}
-		}
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 
 		return stack;
 	}
@@ -68,6 +55,12 @@ public class ItemDebug extends ItemPossession {
 	}
 
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+
+		if (world.getTileEntity(x, y, z) != null) {
+			player.addChatComponentMessage(new ChatComponentText(world.getTileEntity(x, y, z).toString()));
+		} else {
+			player.addChatComponentMessage(new ChatComponentText("null"));
+		}
 
 		return true;
 	}
