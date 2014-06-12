@@ -11,6 +11,10 @@
 
 package com.tinkerlad.dimension.reference;
 
+import com.tinkerlad.dimension.block.DimBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+
 public class BlockInfo {
 
 	public static final String TEXTURE_LOCATION = ModInfo.ID.toLowerCase() + ":";
@@ -43,6 +47,10 @@ public class BlockInfo {
 	// BlockHardenedOre
 	public static final String HARDENED_ORE_ULOCALIZED_NAME = "oreHardened";
 	public static final String HARDENED_ORE_TEXTURE = "hardenedOre";
+	public static final Block HARDENED_ORE[] = {Blocks.redstone_ore, Blocks.coal_ore, Blocks.diamond_ore,
+			                                           Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore,
+			                                           Blocks.lapis_ore, Blocks.quartz_ore, DimBlocks.BlockLightStone,
+			                                           DimBlocks.BlockRubyOre};
 
 	// BlockFreakSand
 	public static final String FSAND_ULOCALIZED_NAME = "sandFreak";
@@ -54,7 +62,7 @@ public class BlockInfo {
 
 	//BlockTopSoil
 	public static final String TOPSOIL_ULOCALIZED_NAME = "topSoil";
-	public static final String TOPSOIL_TEXTURE[] = {"soil_grass", "soil", "soil_side"};
+	public static final String TOPSOIL_TEXTURE[] = {"soil_grass", "soil"};
 
 	//BlockFluidDreamWater
 	public static final String DREAMWATER_ULOCALIZED_NAME = "dreamWater";

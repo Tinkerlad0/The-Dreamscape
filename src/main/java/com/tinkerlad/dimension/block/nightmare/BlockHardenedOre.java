@@ -12,8 +12,8 @@
 package com.tinkerlad.dimension.block.nightmare;
 
 import com.tinkerlad.dimension.block.BlockGeneric;
-import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.reference.BlockInfo;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -39,6 +39,9 @@ public class BlockHardenedOre extends BlockGeneric {
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int xPos, int yPos, int zPos, Explosion explosion) {
 
-		world.setBlock(xPos, yPos, zPos, DimBlocks.BlockRubyOre);
+		Random random = new Random(world.getSeed());
+		int oreNum = random.nextInt(BlockInfo.HARDENED_ORE.length);
+		Block ore = BlockInfo.HARDENED_ORE[oreNum - 1];
+		world.setBlock(xPos, yPos, zPos, ore);
 	}
 }

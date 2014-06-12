@@ -38,16 +38,10 @@ public class BlockTopSoil extends BlockGeneric {
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		switch (side) {
-			case 0: {
-				return this.top;
-			}
-			case 1: {
-				return this.bottom;
-			}
-			default: {
-				return this.side;
-			}
+		if (side == 1) {
+			return this.top;
+		} else {
+			return this.side;
 		}
 	}
 
@@ -55,7 +49,6 @@ public class BlockTopSoil extends BlockGeneric {
 	public void registerBlockIcons(IIconRegister register) {
 
 		this.top = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.TOPSOIL_TEXTURE[0]);
-		this.side = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.TOPSOIL_TEXTURE[2]);
-		this.bottom = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.TOPSOIL_TEXTURE[1]);
+		this.side = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.TOPSOIL_TEXTURE[1]);
 	}
 }

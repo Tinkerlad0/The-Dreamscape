@@ -49,6 +49,7 @@ public class BlockDiamondLeaves extends BlockGeneric implements IShearable {
 		this.setHardness(0.2F);
 		this.setLightOpacity(1);
 		this.setStepSound(soundTypeGrass);
+		this.setBlockName(BlockInfo.DIA_LEAVES_ULOCALIZED_NAME);
 	}
 
 	@Override
