@@ -9,23 +9,26 @@
  * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
 
-package com.tinkerlad.dimension.config;
+package com.tinkerlad.dimension.block.ore;
 
-import net.minecraftforge.common.config.Configuration;
+import com.tinkerlad.dimension.block.BlockGeneric;
+import com.tinkerlad.dimension.reference.BlockInfo;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.IIcon;
 
-import java.io.File;
+public class BlockPlatinumOre extends BlockGeneric {
 
-public class ConfigHandler {
+	@SideOnly(Side.CLIENT)
+	protected IIcon blockIcon;
 
-	public static void init(File file) {
-
-		Configuration config = new Configuration(file);
-
-		config.load();
-
-		GameControls.VANILLA_BED = config.get(GameControls.GAME_BOOLEANS, GameControls.VANILLA_BED_NAME, GameControls.VANILLA_BED_DEFAULT).getBoolean(GameControls.VANILLA_BED_DEFAULT);
-		GameControls.DEBUG_MODE = config.get(GameControls.GAME_BOOLEANS, GameControls.DEBUG_NAME, GameControls.DEBUG_DEFAULT, GameControls.DEBUG_COMMENT).getBoolean(GameControls.DEBUG_DEFAULT);
-
-		config.save();
+	public BlockPlatinumOre() {
+		super(Material.rock);
+		setHardness(4F);
+		setResistance(2F);
+		setStepSound(soundTypeStone);
+		setBlockName(BlockInfo.PLATINUM_ULOCALIZED_NAME);
+		setBlockTextureName(BlockInfo.TEXTURE_LOCATION + BlockInfo.PLATINUM_TEXTURE);
 	}
 }

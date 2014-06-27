@@ -38,7 +38,6 @@ public class DimensionGenerator implements IWorldGenerator {
 
 	private void generateNightmare(World world, Random random, int i, int j) {
 
-
 	}
 
 	private void generateDream(World world, Random random, int x, int z) {

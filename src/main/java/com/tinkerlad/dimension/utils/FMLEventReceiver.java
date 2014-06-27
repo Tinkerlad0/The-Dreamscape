@@ -16,12 +16,10 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.WorldServer;
 
-public class FMLEventReciever {
+public class FMLEventReceiver {
 
 	int cooldown = 0;
 
@@ -49,17 +47,6 @@ public class FMLEventReciever {
 		for (int i = 0; i < size; i++) {
 			EntityPlayer player = (EntityPlayer) world.playerEntities.get(i);
 			if (player.dimension == dimID) {
-				InventoryPlayer inventoryDreaming = player.inventory;
-
-				GlobalStorage.PLAYER_INVENTORY_DREAMING.put(player, inventoryDreaming);
-				player.inventory.clearInventory(null, -1);
-
-				if (GlobalStorage.PLAYER_INVENTORY_STANDARD.containsKey(player)) {
-					InventoryPlayer standardInv = GlobalStorage.PLAYER_INVENTORY_STANDARD.get(player);
-					player.inventory.copyInventory(standardInv);
-				} else {
-					player.addChatMessage(new ChatComponentText("You have no saved inventory"));
-				}
 				Utils.teleport(player, 0);
 			}
 		}

@@ -397,19 +397,22 @@ public class ChunkProviderDream implements IChunkProvider {
 
 		int i = par2 * 16;
 		int k = par3 * 16;
+//
+//		// Coal Block
+//		generateDreamOre(Blocks.coal_block, worldObj, rand, i, k, 4, 1, 20, 190);
+//		// Iron Block
+//		generateDreamOre(Blocks.iron_block, worldObj, rand, i, k, 2, 1, 10, 170);
+//		// Gold Block
+//		generateDreamOre(Blocks.gold_block, worldObj, rand, i, k, 4, 1, 4, 80);
+//		// Redstone Block
+//		generateDreamOre(Blocks.redstone_block, worldObj, rand, i, k, 1, 1, 4, 80);
+//		// Lapis Block
+//		generateDreamOre(Blocks.lapis_block, worldObj, rand, i, k, 8, 1, 6, 60);
+//		// Diamond Block
+//		generateDreamOre(Blocks.diamond_block, worldObj, rand, i, k, 4, 1, 0, 50);
 
-		// Coal Block
-		generateDreamOre(Blocks.coal_block, worldObj, rand, i, k, 10, 25, 20, 190);
-		// Iron Block
-		generateDreamOre(Blocks.iron_block, worldObj, rand, i, k, 8, 25, 10, 170);
-		// Gold Block
-		generateDreamOre(Blocks.gold_block, worldObj, rand, i, k, 10, 15, 4, 80);
-		// Redstone Block
-		generateDreamOre(Blocks.redstone_block, worldObj, rand, i, k, 10, 25, 4, 80);
-		// Lapis Block
-		generateDreamOre(Blocks.lapis_block, worldObj, rand, i, k, 8, 25, 6, 60);
-		// Diamond Block
-		generateDreamOre(Blocks.diamond_block, worldObj, rand, i, k, 8, 10, 0, 50);
+		//HardenedOre
+		generateDreamOre(DimBlocks.BlockHardenedOre, worldObj, rand, i, k, 3, 10, 4, 255);
 
 		// End of Ore Spawning
 		biomegenbase.decorate(this.worldObj, this.rand, var4, var5);

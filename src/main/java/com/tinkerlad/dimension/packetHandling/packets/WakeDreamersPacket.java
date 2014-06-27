@@ -11,13 +11,15 @@
 
 package com.tinkerlad.dimension.packetHandling.packets;
 
+import com.tinkerlad.dimension.block.DimBlocks;
+import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.packetHandling.AbstractPacket;
-import com.tinkerlad.dimension.utils.GlobalStorage;
 import com.tinkerlad.dimension.utils.Utils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class WakeDreamersPacket extends AbstractPacket {
 
@@ -38,12 +40,13 @@ public class WakeDreamersPacket extends AbstractPacket {
 
 	@Override
 	public void handleServerSide(EntityPlayer player) {
-		InventoryPlayer inventoryPlayer = new InventoryPlayer(player);
-		inventoryPlayer.copyInventory(player.inventory);
-		GlobalStorage.PLAYER_INVENTORY_DREAMING.put(player, inventoryPlayer);
-		player.inventory.clearInventory(null, -1);
-		if (GlobalStorage.PLAYER_INVENTORY_STANDARD.containsKey(player)) {
-			player.inventory.copyInventory(GlobalStorage.PLAYER_INVENTORY_STANDARD.get(player));
+		for (int slot = 0; slot < player.inventory.getSizeInventory(); slot++) {
+			Item item = player.inventory.getStackInSlot(slot).getItem();
+			if (item == DimItem.rubyGem || item == DimItem.platinumIngot || item == (new ItemStack(DimBlocks
+					                                                                                       .BlockPlatinumOre, 1)).getItem()) {
+
+				player.inventory.clearInventory(DimItem.rubyGem, -1);
+			}
 		}
 		Utils.teleport(player, 0);
 	}

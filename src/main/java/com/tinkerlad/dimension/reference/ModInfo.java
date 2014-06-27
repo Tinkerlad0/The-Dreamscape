@@ -15,8 +15,7 @@ public class ModInfo {
 
 	public static final String ID = "tnkpos";
 	public static final String NAME = "The Dimension";
-	public static final String VERSION = "0.0.b";
 	public static final String CHANNEL = "possess";
-	public static final String DESCRIPTION = "When the boundaries between dreams and nightmares are crossed";
-	public static final String RELEASE = "Zealous Zombie";
+	public static final String VERSION = "@VERSION@";
+	public static final String RELEASE = "@RELEASE@";
 }

@@ -14,6 +14,7 @@ package com.tinkerlad.dimension.block.nightmare;
 import com.tinkerlad.dimension.block.BlockGeneric;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -32,7 +33,7 @@ public class BlockFreakSand extends BlockGeneric {
 	public void updateTick(World world, int x, int y, int z, Random random) {
 
 		if (!world.isRemote) {
-
+			if (random.nextInt(10) == 0) {world.addWeatherEffect(new EntityLightningBolt(world, x, y, z));}
 			if (world.isAirBlock(x, y - 1, z)) {
 				world.setBlock(x, y - 1, z, this);
 				world.setBlockToAir(x, y, z);
@@ -45,6 +46,6 @@ public class BlockFreakSand extends BlockGeneric {
 	@Override
 	public int tickRate(World world) {
 
-		return 5;
+		return 20;
 	}
 }

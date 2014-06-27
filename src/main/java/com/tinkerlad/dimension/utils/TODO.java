@@ -13,7 +13,6 @@ package com.tinkerlad.dimension.utils;
 
 public class TODO {
 	//TODO //BEFORE NEXT RELEASE//
-	//todo DreamScape TopSoil
 	//todo Random Lightning Strikes in Nightmare Realm
 	//todo Implement BASIC 'Spawn' Buildings for Dreamscape and Nightmare Realm
 	//todo Loot chests randomly spawned on surface. or slightly buried... Possible new surface dungeon style.

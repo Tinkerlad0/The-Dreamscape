@@ -11,7 +11,6 @@
 
 package com.tinkerlad.dimension.utils;
 
-import com.tinkerlad.dimension.config.GameControls;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.PossessionInfo;
 import com.tinkerlad.dimension.world.nightmare.TeleporterNightmare;
@@ -44,9 +43,6 @@ public class Utils {
 				if (world.findNearestEntityWithinAABB(Entity.class, bb, player) != null
 						    && world.findNearestEntityWithinAABB(Entity.class, bb, player) instanceof EntityMob) {
 					EntityMob closest = (EntityMob) world.findNearestEntityWithinAABB(Entity.class, bb, player);
-					if (GameControls.DEBUG_MODE) {
-						player.addChatComponentMessage(new ChatComponentText("DimensionsEntity Class is " + closest.getClass()));
-					}
 					for (Class element : PossessionInfo.VALID_MONSTER_ENTITY) {
 						if (closest.getClass() == element) {
 							closest.setHealth(-1);
@@ -54,9 +50,6 @@ public class Utils {
 							// (int) closest.posX, (int) closest.posY,
 							// (int) closest.posZ);
 
-							if (GameControls.DEBUG_MODE) {
-								;
-							}
 							player.addChatComponentMessage(new ChatComponentText(closest.posX + " " + closest.posY + " " + closest.posZ + " is "
 									                                                     + closest.getClass()));
 						}

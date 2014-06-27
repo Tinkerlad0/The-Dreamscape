@@ -22,6 +22,7 @@ import com.tinkerlad.dimension.block.fluids.DimFluids;
 import com.tinkerlad.dimension.block.nightmare.BlockBedrockBreakable;
 import com.tinkerlad.dimension.block.nightmare.BlockFreakSand;
 import com.tinkerlad.dimension.block.nightmare.BlockHardenedOre;
+import com.tinkerlad.dimension.block.ore.BlockPlatinumOre;
 import com.tinkerlad.dimension.block.ore.BlockRubyOre;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.reference.BlockInfo;
@@ -32,7 +33,7 @@ import org.apache.logging.log4j.Level;
 public class DimBlocks {
 
 	public static Block BlockLightStone;
-	public static Block BlockRubyOre;
+	public static Block BlockManual;
 
 	// DreamBlocks
 	public static Block BlockDiamondLeaves;
@@ -40,9 +41,13 @@ public class DimBlocks {
 	public static Block BlockTopSoil;
 
 	// NightmareBlocks
-	public static Block BlockHardenedOre;
 	public static Block BlockFreakySand;
 	public static Block BlockBedrockBreakable;
+
+	//Ore
+	public static Block BlockHardenedOre;
+	public static Block BlockPlatinumOre;
+	public static Block BlockRubyOre;
 
 	//BedBlocks
 	public static Block BlockBedMaster;
@@ -84,11 +89,17 @@ public class DimBlocks {
 		BlockBedMaster = new BlockBedMaster();
 		GameRegistry.registerBlock(BlockBedMaster, BlockInfo.MASTER_ULOCALIZED_NAME);
 
+		BlockPlatinumOre = new BlockPlatinumOre();
+		GameRegistry.registerBlock(BlockPlatinumOre, BlockInfo.PLATINUM_ULOCALIZED_NAME);
+
 		BlockDebug = new BlockDebug();
 		GameRegistry.registerBlock(BlockDebug, BlockInfo.DEBUG_ULOCALIZED_NAME);
 
 		BlockGlobalStorage = new BlockGlobalStorage();
 		GameRegistry.registerBlock(BlockGlobalStorage, BlockInfo.GLOBAL_ULOCALIZED_NAME);
+
+		BlockManual = new BlockManual();
+		GameRegistry.registerBlock(BlockManual, BlockInfo.MANUAL_NAME);
 
 		BlockTier1 = new BlockBed1();
 		BlockTier2 = new BlockBed2();

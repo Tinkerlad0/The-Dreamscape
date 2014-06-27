@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
-public class ItemRuby extends ItemPossession {
+public class ItemRuby extends ItemGeneric {
 
 	public ItemRuby() {
 		super();

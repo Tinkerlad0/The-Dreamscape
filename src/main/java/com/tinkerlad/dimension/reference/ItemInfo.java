@@ -20,28 +20,21 @@ public class ItemInfo {
 	 */
 
 	// Debug Item
-	public static final String DEBUG_KEY = "debugItem";
-	public static final String DEBUG_CATEGORY = "Debug";
-	public static final String DEBUG_COMMENT = "A Debug Item for Testing Code";
 	public static final String DEBUG_UNLOCALIZED_NAME = "debugItem";
-	public static final String DEBUG_NAME = "Debug Item";
 	public static final String DEBUG_ICON = "debugItem";
 
 	// BedLeg
-
-	public static final String LEG_KEY = "bedLeg";
 	public static final String LEG_UNLOCALIZED_NAME = "bedLeg";
-	public static final String LEG_NAME = "Bed Leg";
 	public static final String LEG_ICON = "bedLeg";
 
 	// ItemRuby
-	public static final String RUBY_KEY = "rubyGem";
 	public static final String RUBY_UNLOCALIZED_NAME = "rubyGem";
-	public static final String RUBY_NAME = "Ruby";
 	public static final String RUBY_ICON = "ruby";
 
-	// BlockBed Texture
-	public static final String BED_KEY = "dimensionalBedItem";
-	public static final String BED_UNLOCALIZED_NAME = "dimBedItem";
-	public static final String BED_ICON = "bed";
+	//ItemPlatinum
+	public static final String PLATINUM_UNLOCALIZED_NAME = "platinumIngot";
+	public static final String PLATINUM_ICON = "platinum";
+
+	//ItemManual
+	public static final String MANUAL_UNLOCALIZED_NAME = "manualBook";
 }

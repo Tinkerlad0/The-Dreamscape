@@ -9,23 +9,16 @@
  * 	Tinkerlad - initial concept and implementation                            *
  ******************************************************************************/
 
-package com.tinkerlad.dimension.modules;
+package com.tinkerlad.dimension.item;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import com.tinkerlad.dimension.creativeTab.TabItems;
+import net.minecraft.item.Item;
 
-public class ForgeEventReciever {
+public class ItemGeneric extends Item {
 
-	@SubscribeEvent
-	public void onPlayerSleep(PlayerSleepInBedEvent event) {
-		if (!event.isCanceled()) {
-			if (event.entityPlayer.worldObj.isRemote) {
-				System.out.println(event.entityPlayer.worldObj.isRemote);
-				SleepTimer timer = new SleepTimer(60, event.entityPlayer);
-				FMLCommonHandler.instance().bus().register(timer);
-				timer.enable();
-			}
-		}
+	public ItemGeneric() {
+
+		super();
+		setCreativeTab(TabItems.tabPossession);
 	}
 }

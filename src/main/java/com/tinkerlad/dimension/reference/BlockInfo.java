@@ -26,7 +26,7 @@ public class BlockInfo {
 
 	// BlockPlatinumOre
 	public static final String PLATINUM_ULOCALIZED_NAME = "orePlatinum";
-	public static final String PLATINUM_TEXTURE = "platinum";
+	public static final String PLATINUM_TEXTURE = "platinum_ore";
 
 	// BlockRubyOre
 	public static final String RUBY_ULOCALIZED_NAME = "oreRuby";
@@ -66,7 +66,6 @@ public class BlockInfo {
 
 	//BlockFluidDreamWater
 	public static final String DREAMWATER_ULOCALIZED_NAME = "dreamWater";
-	public static final String DREAMWATER_TEXTURE[] = {""};
 
 	//BlockGlobalStorage
 	public static final String GLOBAL_ULOCALIZED_NAME = "globalStorage";
@@ -74,9 +73,12 @@ public class BlockInfo {
 
 	//BlockBedMaster
 	public static final String MASTER_ULOCALIZED_NAME = "masterBed";
-	public static final String MASTER_TEXTURE[] = {"stone", "pensive"};
+	public static final String MASTER_TEXTURE[] = {"bed_top", "bed_side", "bed_bottom"};
 
 	//BlockBed Bases
 	public static final String BASE_ULOCALIZED_NAME[] = {"bedTier1", "bedTier2", "bedTier3"};
 	public static final String BASE_TEXTURE[] = {"tier1", "tier2", "tier3"};
+
+	//BlockManual
+	public static final String MANUAL_NAME = "manual";
 }

@@ -13,10 +13,10 @@ package com.tinkerlad.dimension;
 
 import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.command.PossessionCommand;
-import com.tinkerlad.dimension.config.ConfigHandler;
-import com.tinkerlad.dimension.config.GameControls;
 import com.tinkerlad.dimension.creativeTab.TabHandler;
+import com.tinkerlad.dimension.effects.potion.Potions;
 import com.tinkerlad.dimension.entity.DimensionsEntity;
+import com.tinkerlad.dimension.gui.GUIHandler;
 import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.packetHandling.PacketPipeline;
@@ -26,18 +26,25 @@ import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.reference.ModInfo;
 import com.tinkerlad.dimension.tileEntities.TileBedMaster;
 import com.tinkerlad.dimension.tileEntities.TileGlobalStorage;
-import com.tinkerlad.dimension.utils.*;
+import com.tinkerlad.dimension.utils.FMLEventReceiver;
+import com.tinkerlad.dimension.utils.ForgeEventReceiver;
+import com.tinkerlad.dimension.utils.Recipes;
+import com.tinkerlad.dimension.utils.Utils;
 import com.tinkerlad.dimension.world.Dimension;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
-import java.io.File;
 import java.io.IOException;
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
@@ -48,24 +55,31 @@ public class Possession {
 	public static Possession instance;
 	@SidedProxy(clientSide = "com.tinkerlad.dimension.proxies.ClientProxy", serverSide = "com.tinkerlad.dimension.proxies.CommonProxy")
 	public static CommonProxy proxy;
-	public static GlobalStorage storedInv;
-	public static File configDir;
+
+	public static Configuration configFile;
+	public static boolean VANILLA_BED = false;
+
+	public static void syncConfig() {
+
+		VANILLA_BED = configFile.hasChanged();
+	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) throws ClassNotFoundException, IOException {
 
-		LogHelper.logger = event.getModLog();
-		configDir = event.getSuggestedConfigurationFile();
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		TabHandler.init();
+		configFile = new Configuration(event.getSuggestedConfigurationFile());
 
+		syncConfig();
+
+		LogHelper.logger = event.getModLog();
+		TabHandler.init();
 
 		DimBlocks.init();
 		DimItem.init();
 		Dimension.init();
 		DimensionsEntity.init();
 
-		if (!GameControls.VANILLA_BED) {
+		if (!VANILLA_BED) {
 			Utils.removeVanillaBed();
 		}
 
@@ -73,9 +87,15 @@ public class Possession {
 		GameRegistry.registerTileEntity(TileGlobalStorage.class, BlockInfo.GLOBAL_ULOCALIZED_NAME);
 		GameRegistry.registerTileEntity(TileBedMaster.class, BlockInfo.MASTER_ULOCALIZED_NAME);
 
+		MinecraftForge.EVENT_BUS.register(new ForgeEventReceiver());
+		FMLCommonHandler.instance().bus().register(new FMLEventReceiver());
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
+
+		Potions.preInit();
+		Potions.init();
+
 		Recipes.addRecipes();
-		MinecraftForge.EVENT_BUS.register(new ForgeEventReciever());
-		FMLCommonHandler.instance().bus().register(new FMLEventReciever());
 	}
 
 	@EventHandler
@@ -94,17 +114,5 @@ public class Possession {
 	public void serverStarting(FMLServerStartingEvent event) {
 
 		event.registerServerCommand(new PossessionCommand());
-	}
-
-	@EventHandler
-	public void serverStarted(FMLServerStartedEvent event) throws IOException, ClassNotFoundException {
-
-		storedInv = new GlobalStorage(configDir);
-	}
-
-	@EventHandler
-	public void serverStopping(FMLServerStoppingEvent event) throws IOException {
-
-		System.out.println(GlobalStorage.saveToFile() ? "Saved Inventories Correctly" : "Did not save correctly");
 	}
 }

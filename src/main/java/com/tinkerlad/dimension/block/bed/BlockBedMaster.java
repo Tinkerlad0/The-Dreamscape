@@ -22,6 +22,8 @@ public class BlockBedMaster extends BlockGeneric implements ITileEntityProvider 
 	private IIcon top;
 	@SideOnly(Side.CLIENT)
 	private IIcon side;
+	@SideOnly(Side.CLIENT)
+	private IIcon bottom;
 
 	public BlockBedMaster() {
 		super(Material.cloth);
@@ -34,26 +36,31 @@ public class BlockBedMaster extends BlockGeneric implements ITileEntityProvider 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
 
-		if (side == 0 || side == 1) {
-			// top or bottom
-			return this.top;
-		} else {
-			return this.side;
+		switch (side) {
+			case 0:
+				return this.bottom;
+			case 1:
+				return this.top;
+			default:
+				return this.side;
 		}
 	}
 
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer player) {
-		System.out.println(par2 + " " + par3 + " " + par4);
 		TileEntity tile = par1World.getTileEntity(par2, par3, par4);
 		if (tile instanceof TileBedMaster) {
 			TileBedMaster BedTile = (TileBedMaster) tile;
+			((TileBedMaster) tile).sleepPlayer(player);
+		} else {
+			System.out.println("No TileBedMaster Found at " + par2 + " " + par3 + " " + par4 + "!!!!!");
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
-		this.top = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.MASTER_TEXTURE[1]);
-		this.side = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.MASTER_TEXTURE[0]);
+		this.top = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.MASTER_TEXTURE[0]);
+		this.side = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.MASTER_TEXTURE[1]);
+		this.bottom = register.registerIcon(BlockInfo.TEXTURE_LOCATION + BlockInfo.MASTER_TEXTURE[2]);
 	}
 
 	@Override

@@ -28,20 +28,28 @@ public class BlockHardenedOre extends BlockGeneric {
 		this.lightValue = 8;
 		setBlockName(BlockInfo.HARDENED_ORE_ULOCALIZED_NAME);
 		setBlockTextureName(BlockInfo.TEXTURE_LOCATION + BlockInfo.HARDENED_ORE_TEXTURE);
+		setHardness(16F);
+		setHarvestLevel("pick", 4);
 	}
 
 	@Override
 	public int quantityDropped(Random random) {
 
-		return 0;
+		return random.nextInt(10);
 	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(World world, int xPos, int yPos, int zPos, Explosion explosion) {
+		Random random = new Random();
+		int oreNum = random.nextInt(BlockInfo.HARDENED_ORE.length - 1);
+		if (0 < oreNum && oreNum < BlockInfo.HARDENED_ORE.length) {
+			Block ore = BlockInfo.HARDENED_ORE[oreNum];
+			world.setBlockToAir(xPos, yPos, zPos);
+			world.setBlock(xPos, yPos, zPos, ore);
+		}
+	}
 
-		Random random = new Random(world.getSeed());
-		int oreNum = random.nextInt(BlockInfo.HARDENED_ORE.length);
-		Block ore = BlockInfo.HARDENED_ORE[oreNum - 1];
-		world.setBlock(xPos, yPos, zPos, ore);
+	public boolean canSilkHarvest() {
+		return true;
 	}
 }

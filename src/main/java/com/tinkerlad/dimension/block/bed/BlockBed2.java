@@ -17,7 +17,8 @@ public class BlockBed2 extends BlockBed1 {
 		setResistance(2F);
 		setStepSound(soundTypeStone);
 		setBlockName(BlockInfo.BASE_ULOCALIZED_NAME[1]);
-		setBlockTextureName(BlockInfo.BASE_TEXTURE[1]);
+		setBlockTextureName(BlockInfo.TEXTURE_LOCATION + BlockInfo.BEDROCK_TEXTURE);
+		//setBlockTextureName(BlockInfo.BASE_TEXTURE[1]);
 	}
 
 	@Override

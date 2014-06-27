@@ -29,6 +29,9 @@ public class DimensionsEntity {
 
 		registerEntity(EntityExitGuard.class, "entityExitGuard");
 		registerEntity(EntityRidgebackSpider.class, "entityRidgebackSpider");
+
+		int id = EntityRegistry.findGlobalUniqueEntityId();
+		EntityRegistry.registerGlobalEntityID(EntityCamera.class, "camera", id);
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
