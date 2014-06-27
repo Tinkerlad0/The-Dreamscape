@@ -3,7 +3,7 @@ package com.tinkerlad.dimension.utils;
 import com.tinkerlad.dimension.Possession;
 import com.tinkerlad.dimension.block.DimBlocks;
 import com.tinkerlad.dimension.effects.potion.Potions;
-import com.tinkerlad.dimension.gui.GUIEmpty;
+import com.tinkerlad.dimension.GUI.GUIEmpty;
 import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import com.tinkerlad.dimension.world.Dimension;

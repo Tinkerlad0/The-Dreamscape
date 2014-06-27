@@ -1,7 +1,7 @@
 package com.tinkerlad.dimension.block;
 
 import com.tinkerlad.dimension.Possession;
-import com.tinkerlad.dimension.gui.GuiManual;
+import com.tinkerlad.dimension.GUI.GuiManual;
 import com.tinkerlad.dimension.reference.BlockInfo;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

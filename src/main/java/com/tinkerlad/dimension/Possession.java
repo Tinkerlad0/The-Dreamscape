@@ -16,7 +16,7 @@ import com.tinkerlad.dimension.command.PossessionCommand;
 import com.tinkerlad.dimension.creativeTab.TabHandler;
 import com.tinkerlad.dimension.effects.potion.Potions;
 import com.tinkerlad.dimension.entity.DimensionsEntity;
-import com.tinkerlad.dimension.gui.GUIHandler;
+import com.tinkerlad.dimension.GUI.GUIHandler;
 import com.tinkerlad.dimension.item.DimItem;
 import com.tinkerlad.dimension.logging.LogHelper;
 import com.tinkerlad.dimension.packetHandling.PacketPipeline;
